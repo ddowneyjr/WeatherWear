@@ -7,10 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-<<<<<<< HEAD
 		8E4EDF5B2B0299F7007DBFEB /* AlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4EDF5A2B0299F7007DBFEB /* AlarmViewController.swift */; };
-=======
->>>>>>> refs/remotes/origin/main
 		B8FD54F72AFD5977006AC49E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FD54F62AFD5977006AC49E /* AppDelegate.swift */; };
 		B8FD54F92AFD5977006AC49E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FD54F82AFD5977006AC49E /* SceneDelegate.swift */; };
 		B8FD54FB2AFD5977006AC49E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FD54FA2AFD5977006AC49E /* ViewController.swift */; };
@@ -20,11 +17,9 @@
 		B8FD55062AFD5978006AC49E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8FD55042AFD5978006AC49E /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
+
 /* Begin PBXFileReference section */
-<<<<<<< HEAD
 		8E4EDF5A2B0299F7007DBFEB /* AlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmViewController.swift; sourceTree = "<group>"; };
-=======
->>>>>>> refs/remotes/origin/main
 		B8FD54F32AFD5977006AC49E /* WeatherWear.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherWear.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8FD54F62AFD5977006AC49E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B8FD54F82AFD5977006AC49E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -35,7 +30,6 @@
 		B8FD55052AFD5978006AC49E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B8FD55072AFD5978006AC49E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
 /* Begin PBXFrameworksBuildPhase section */
 		B8FD54F02AFD5977006AC49E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
@@ -69,10 +63,7 @@
 				B8FD54F62AFD5977006AC49E /* AppDelegate.swift */,
 				B8FD54F82AFD5977006AC49E /* SceneDelegate.swift */,
 				B8FD54FA2AFD5977006AC49E /* ViewController.swift */,
-<<<<<<< HEAD
 				8E4EDF5A2B0299F7007DBFEB /* AlarmViewController.swift */,
-=======
->>>>>>> refs/remotes/origin/main
 				B8FD54FC2AFD5977006AC49E /* Main.storyboard */,
 				B8FD55022AFD5978006AC49E /* Assets.xcassets */,
 				B8FD55042AFD5978006AC49E /* LaunchScreen.storyboard */,
@@ -153,10 +144,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-<<<<<<< HEAD
 				8E4EDF5B2B0299F7007DBFEB /* AlarmViewController.swift in Sources */,
-=======
->>>>>>> refs/remotes/origin/main
 				B8FD54FB2AFD5977006AC49E /* ViewController.swift in Sources */,
 				B8FD54F72AFD5977006AC49E /* AppDelegate.swift in Sources */,
 				B8FD54F92AFD5977006AC49E /* SceneDelegate.swift in Sources */,
