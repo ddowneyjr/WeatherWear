@@ -45,7 +45,5 @@ class ViewController: UIViewController {
         super.viewDidLayoutSubviews()
         alarmButton.center = view.center
     }
-    
-
 }
 
