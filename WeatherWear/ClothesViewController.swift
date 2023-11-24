@@ -15,6 +15,7 @@ class ClothesViewController: UIViewController{
    
     private var tableView: UITableView = {
         let tableView = UITableView()
+        tableView.backgroundColor = UIColor(red: 218/255.0, green: 182/255.0, blue: 236/255.0, alpha: 1.0)
         tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: CustomTableViewCell.identifier)
         return tableView
     }()
@@ -96,6 +97,13 @@ extension ClothesViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 175
     }
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 10
+//    }
+//    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+//        return 10
+//    }
+
 }
 
 //used to supply data
@@ -112,6 +120,7 @@ extension ClothesViewController: UITableViewDataSource {
         
         return cell
     }
+    
 //    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
 //        cell.backgroundColor = UIColor(red: 180/255.0, green: 93/255.0, blue: 224/255.0, alpha: 1.0)
 //

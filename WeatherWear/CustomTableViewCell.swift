@@ -11,14 +11,6 @@ class CustomTableViewCell: UITableViewCell {
     
     static let identifier = "CustomTableViewCell"
     
-    
-//    private let _switch : UISwitch = {
-//        let _switch = UISwitch()
-//        _switch.isOn = true
-//
-//        return _switch
-//    }()
-    
     private let titleArray: NSArray = ["Hats","Tops","Bottoms", "Footwear", "OuterWear"]
     
     private var categoryText : UILabel = {
@@ -36,19 +28,13 @@ class CustomTableViewCell: UITableViewCell {
     var clothesScroll: UIScrollView!
     var images = [UIImageView]()
 
-
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-                
         contentView.backgroundColor = UIColor(red: 180/255.0, green: 93/255.0, blue: 224/255.0, alpha: 1.0)
         contentView.addSubview(categoryText)
-        
         //adding scroll view
         clothesScroll = UIScrollView(frame: CGRect(x: 5, y: 40, width: contentView.frame.width, height: 200))
-        //clothesScroll.backgroundColor = .systemTeal
-        //clothesScroll.showsHorizontalScrollIndicator = false
         contentView.addSubview(clothesScroll)
-        
         
         // Uncomment the loop for adding multiple images
         for i in 0..<titleArray.count {
@@ -74,22 +60,12 @@ class CustomTableViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        //_switch.frame = CGRect(x: 5, y: 125, width: 100, height: contentView.frame.size.height )
-        
         categoryText.frame = CGRect(x: 5, y: 5, width: contentView.frame.size.width - 50, height: 25)
         clothesScroll.frame = CGRect(x: 5, y: 40, width: contentView.frame.size.width - 10, height: 125)
+        
+//============= adding this line separates the cells but adds a white border i cant figure out how to change =============
+        //contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
 
     }
     
 }
-
-//extension UIScrollView{
-//    func scrollToView(view:UIView, animated: Bool) {
-//        if let origin = view.superview {
-//            // Get the Y position of your child view
-//            let childStartPoint = origin.convert(view.frame.origin, to: self)
-//            // Scroll to a rectangle starting at the Y of your subview, with a height of the scrollview
-//            self.scrollRectToVisible(CGRect(x:0, y:childStartPoint.y,width: 1,height: self.frame.height), animated: animated)
-//        }
-//    }
-//}
