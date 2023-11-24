@@ -55,7 +55,7 @@ class ViewController: UIViewController {
     @objc func clothesButtonTap() {
         let tabBarVC = UITabBarController()
         
-        let avc = UINavigationController(rootViewController: AlarmViewController())
+        let avc = UINavigationController(rootViewController: ClothesViewController())
         
         avc.title = "Clothes"
         
