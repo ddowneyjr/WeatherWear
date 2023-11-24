@@ -18,7 +18,18 @@ class ClothesViewController: UIViewController{
         tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: CustomTableViewCell.identifier)
         return tableView
     }()
+    
+    //hide top nav bar
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
 
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+//        navigationController?.setNavigationBarHidden(false, animated: animated)
+//    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -64,7 +75,7 @@ class ClothesViewController: UIViewController{
         super.viewDidLayoutSubviews()
         
         //to edit height of UITableView
-        let topPadding: CGFloat = 0
+        let topPadding: CGFloat = 100
         let bottomPadding: CGFloat = 0
         tableView.frame = CGRect(x: 0, y: topPadding, width: view.bounds.width, height: view.bounds.height - topPadding - bottomPadding)
     }

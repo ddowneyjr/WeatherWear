@@ -53,13 +53,12 @@ class ViewController: UIViewController {
     }
     
     @objc func clothesButtonTap() {
+        let clothesVC = ClothesViewController()
+        let navController = UINavigationController(rootViewController: clothesVC)
+        clothesVC.title = "Clothes"
+
         let tabBarVC = UITabBarController()
-        
-        let avc = UINavigationController(rootViewController: ClothesViewController())
-        
-        avc.title = "Clothes"
-        
-        tabBarVC.setViewControllers([avc], animated: false)
+        tabBarVC.setViewControllers([navController], animated: false)
         tabBarVC.modalPresentationStyle = .fullScreen
         tabBarVC.tabBar.isTranslucent = false
         tabBarVC.tabBar.backgroundColor = .white
