@@ -62,8 +62,10 @@ class ClothesViewController: UIViewController{
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        let topPadding: CGFloat = 100
-        let bottomPadding: CGFloat = 50
+        
+        //to edit height of UITableView
+        let topPadding: CGFloat = 0
+        let bottomPadding: CGFloat = 0
         tableView.frame = CGRect(x: 0, y: topPadding, width: view.bounds.width, height: view.bounds.height - topPadding - bottomPadding)
     }
     
