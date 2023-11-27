@@ -26,19 +26,24 @@ class CustomTableViewCell: UITableViewCell {
     }
     
     var clothesScroll: UIScrollView!
-    var images = [UIImageView]()
+    
+    var hats = [UIImageView]()
+    var tops = [UIImageView]()
+    var bottoms = [UIImageView]()
+    var footwear = [UIImageView]()
+    var outerwear = [UIImageView]()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.backgroundColor = UIColor(red: 180/255.0, green: 93/255.0, blue: 224/255.0, alpha: 1.0)
         contentView.addSubview(categoryText)
+        
         //adding scroll view
         clothesScroll = UIScrollView(frame: CGRect(x: 5, y: 40, width: contentView.frame.width, height: 200))
         contentView.addSubview(clothesScroll)
         
-        // Uncomment the loop for adding multiple images
         for i in 0..<titleArray.count {
-            let imageName = "jacket"
+            let imageName = "cap"
             let image = UIImageView(image: UIImage(named: imageName))
             let xPosition = CGFloat(i) * 110
             image.frame = CGRect(x: xPosition, y: 0, width: 100, height: 100)
