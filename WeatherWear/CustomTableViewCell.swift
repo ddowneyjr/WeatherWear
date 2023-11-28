@@ -27,11 +27,37 @@ class CustomTableViewCell: UITableViewCell {
     
     var clothesScroll: UIScrollView!
     
-    var hats = [UIImageView]()
-    var tops = [UIImageView]()
-    var bottoms = [UIImageView]()
-    var footwear = [UIImageView]()
-    var outerwear = [UIImageView]()
+    //var hats = [UIImageView]()
+    var hats = [
+        UIImageView(image: UIImage(named: "cap")),
+        UIImageView(image: UIImage(named: "beanie")),
+        UIImageView(image: UIImage(named: "rainhat"))
+    ]
+    var tops = [
+        UIImageView(image: UIImage(named: "blouse")),
+        UIImageView(image: UIImage(named: "longsleeve")),
+        UIImageView(image: UIImage(named: "shortsleeve")),
+        UIImageView(image: UIImage(named: "tanktop"))
+    ]
+    var bottoms = [
+        UIImageView(image: UIImage(named: "pants")),
+        UIImageView(image: UIImage(named: "shorts")),
+        UIImageView(image: UIImage(named: "skirt"))
+    ]
+    var footwear = [
+        UIImageView(image: UIImage(named: "flipflops")),
+        UIImageView(image: UIImage(named: "rainboots")),
+        UIImageView(image: UIImage(named: "sandals")),
+        UIImageView(image: UIImage(named: "sneakers")),
+        UIImageView(image: UIImage(named: "snowboots"))
+    ]
+    var outerwear = [
+        UIImageView(image: UIImage(named: "lightjacket")),
+        UIImageView(image: UIImage(named: "raincoat")),
+        UIImageView(image: UIImage(named: "sweater")),
+        UIImageView(image: UIImage(named: "vest")),
+        UIImageView(image: UIImage(named: "warm jacket"))
+    ]
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
