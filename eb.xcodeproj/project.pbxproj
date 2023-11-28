@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84A4ABD22B1034DD0027DBDA /* ClothesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A4ABD12B1034DD0027DBDA /* ClothesViewController.swift */; };
+		84A4ABD42B1035F10027DBDA /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A4ABD32B1035F10027DBDA /* CustomTableViewCell.swift */; };
 		8E4EDF5B2B0299F7007DBFEB /* AlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4EDF5A2B0299F7007DBFEB /* AlarmViewController.swift */; };
 		8EECE5D72B068E54009A25D5 /* AlarmListItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EECE5D52B068E54009A25D5 /* AlarmListItem+CoreDataClass.swift */; };
 		8EECE5D82B068E54009A25D5 /* AlarmListItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EECE5D62B068E54009A25D5 /* AlarmListItem+CoreDataProperties.swift */; };
@@ -20,6 +22,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		84A4ABD12B1034DD0027DBDA /* ClothesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothesViewController.swift; sourceTree = "<group>"; };
+		84A4ABD32B1035F10027DBDA /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		8E4EDF5A2B0299F7007DBFEB /* AlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmViewController.swift; sourceTree = "<group>"; };
 		8EECE5D52B068E54009A25D5 /* AlarmListItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AlarmListItem+CoreDataClass.swift"; sourceTree = "<group>"; };
 		8EECE5D62B068E54009A25D5 /* AlarmListItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AlarmListItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -77,6 +81,8 @@
 				B8FD54F62AFD5977006AC49E /* AppDelegate.swift */,
 				B8FD54F82AFD5977006AC49E /* SceneDelegate.swift */,
 				B8FD54FA2AFD5977006AC49E /* ViewController.swift */,
+				84A4ABD32B1035F10027DBDA /* CustomTableViewCell.swift */,
+				84A4ABD12B1034DD0027DBDA /* ClothesViewController.swift */,
 				8E4EDF5A2B0299F7007DBFEB /* AlarmViewController.swift */,
 				B8FD54FC2AFD5977006AC49E /* Main.storyboard */,
 				B8FD55022AFD5978006AC49E /* Assets.xcassets */,
@@ -162,9 +168,14 @@
 				B8FD54FB2AFD5977006AC49E /* ViewController.swift in Sources */,
 				8EECE5D72B068E54009A25D5 /* AlarmListItem+CoreDataClass.swift in Sources */,
 				B8FD54F72AFD5977006AC49E /* AppDelegate.swift in Sources */,
+<<<<<<< HEAD
 				8EECE5D82B068E54009A25D5 /* AlarmListItem+CoreDataProperties.swift in Sources */,
+=======
+				84A4ABD42B1035F10027DBDA /* CustomTableViewCell.swift in Sources */,
+>>>>>>> 304cb3eebd11a99feecbc97f122481cdbd393366
 				B8FD54F92AFD5977006AC49E /* SceneDelegate.swift in Sources */,
 				B8FD55012AFD5977006AC49E /* WeatherWear.xcdatamodeld in Sources */,
+				84A4ABD22B1034DD0027DBDA /* ClothesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
