@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8E4EDF5B2B0299F7007DBFEB /* AlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4EDF5A2B0299F7007DBFEB /* AlarmViewController.swift */; };
+		8EECE5D72B068E54009A25D5 /* AlarmListItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EECE5D52B068E54009A25D5 /* AlarmListItem+CoreDataClass.swift */; };
+		8EECE5D82B068E54009A25D5 /* AlarmListItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EECE5D62B068E54009A25D5 /* AlarmListItem+CoreDataProperties.swift */; };
 		B8FD54F72AFD5977006AC49E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FD54F62AFD5977006AC49E /* AppDelegate.swift */; };
 		B8FD54F92AFD5977006AC49E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FD54F82AFD5977006AC49E /* SceneDelegate.swift */; };
 		B8FD54FB2AFD5977006AC49E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FD54FA2AFD5977006AC49E /* ViewController.swift */; };
@@ -17,9 +19,10 @@
 		B8FD55062AFD5978006AC49E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8FD55042AFD5978006AC49E /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
-
 /* Begin PBXFileReference section */
 		8E4EDF5A2B0299F7007DBFEB /* AlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmViewController.swift; sourceTree = "<group>"; };
+		8EECE5D52B068E54009A25D5 /* AlarmListItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AlarmListItem+CoreDataClass.swift"; sourceTree = "<group>"; };
+		8EECE5D62B068E54009A25D5 /* AlarmListItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AlarmListItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B8FD54F32AFD5977006AC49E /* WeatherWear.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherWear.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8FD54F62AFD5977006AC49E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B8FD54F82AFD5977006AC49E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -30,6 +33,7 @@
 		B8FD55052AFD5978006AC49E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B8FD55072AFD5978006AC49E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
 /* Begin PBXFrameworksBuildPhase section */
 		B8FD54F02AFD5977006AC49E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
@@ -41,6 +45,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8EECE5D92B068E75009A25D5 /* AlarmListItem */ = {
+			isa = PBXGroup;
+			children = (
+				8EECE5D62B068E54009A25D5 /* AlarmListItem+CoreDataProperties.swift */,
+				8EECE5D52B068E54009A25D5 /* AlarmListItem+CoreDataClass.swift */,
+			);
+			path = AlarmListItem;
+			sourceTree = "<group>";
+		};
 		B8FD54EA2AFD5977006AC49E = {
 			isa = PBXGroup;
 			children = (
@@ -60,6 +73,7 @@
 		B8FD54F52AFD5977006AC49E /* WeatherWear */ = {
 			isa = PBXGroup;
 			children = (
+				8EECE5D92B068E75009A25D5 /* AlarmListItem */,
 				B8FD54F62AFD5977006AC49E /* AppDelegate.swift */,
 				B8FD54F82AFD5977006AC49E /* SceneDelegate.swift */,
 				B8FD54FA2AFD5977006AC49E /* ViewController.swift */,
@@ -146,7 +160,9 @@
 			files = (
 				8E4EDF5B2B0299F7007DBFEB /* AlarmViewController.swift in Sources */,
 				B8FD54FB2AFD5977006AC49E /* ViewController.swift in Sources */,
+				8EECE5D72B068E54009A25D5 /* AlarmListItem+CoreDataClass.swift in Sources */,
 				B8FD54F72AFD5977006AC49E /* AppDelegate.swift in Sources */,
+				8EECE5D82B068E54009A25D5 /* AlarmListItem+CoreDataProperties.swift in Sources */,
 				B8FD54F92AFD5977006AC49E /* SceneDelegate.swift in Sources */,
 				B8FD55012AFD5977006AC49E /* WeatherWear.xcdatamodeld in Sources */,
 			);
