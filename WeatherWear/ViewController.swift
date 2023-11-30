@@ -84,7 +84,7 @@ class ViewController: UIViewController {
         
         let wvc = UINavigationController(rootViewController: WeatherViewController())
         
-        wvc.title = "Alarm"
+        wvc.title = "Weather"
         
         tabBarVC.setViewControllers([wvc], animated: false)
         tabBarVC.modalPresentationStyle = .fullScreen
