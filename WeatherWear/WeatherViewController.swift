@@ -16,7 +16,11 @@ import CoreLocation
 
 class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
     
-    @IBOutlet var table: UITableView!
+    let table: UITableView = {
+        let table = UITableView()
+        table.register(WeatherTableViewCell.nib(), forCellReuseIdentifier: WeatherTableViewCell.identifier )
+        return table
+    }()
     
     var models = [WeatherData]()
 //    var weekly = [DayWeather]()
@@ -37,8 +41,12 @@ class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         // register 2 cells
         
-        table.register(WeatherTableViewCell.nib(), forCellReuseIdentifier: WeatherTableViewCell.identifier)
+        
+        
         view.backgroundColor = UIColor(red: 52/255.0, green: 109/255.0, blue: 179/255.0, alpha: 1.0)
+        
+        self.view.addSubview(table)
+        table.frame = view.bounds
         
         table.delegate = self
         table.dataSource = self
