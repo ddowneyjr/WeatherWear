@@ -20,6 +20,8 @@
 		B8FD55012AFD5977006AC49E /* WeatherWear.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B8FD54FF2AFD5977006AC49E /* WeatherWear.xcdatamodeld */; };
 		B8FD55032AFD5978006AC49E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8FD55022AFD5978006AC49E /* Assets.xcassets */; };
 		B8FD55062AFD5978006AC49E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8FD55042AFD5978006AC49E /* LaunchScreen.storyboard */; };
+		B8FEBF9A2B166F6B000FBFAC /* AlarmListItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FEBF982B166F6B000FBFAC /* AlarmListItem+CoreDataClass.swift */; };
+		B8FEBF9B2B166F6B000FBFAC /* AlarmListItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FEBF992B166F6B000FBFAC /* AlarmListItem+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,8 @@
 		B8FD55022AFD5978006AC49E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B8FD55052AFD5978006AC49E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B8FD55072AFD5978006AC49E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B8FEBF982B166F6B000FBFAC /* AlarmListItem+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AlarmListItem+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B8FEBF992B166F6B000FBFAC /* AlarmListItem+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AlarmListItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +83,7 @@
 		B8FD54F52AFD5977006AC49E /* WeatherWear */ = {
 			isa = PBXGroup;
 			children = (
+				B8FEBF972B166F6B000FBFAC /* AlarmListItem */,
 				B85BB20E2B166267002F3731 /* WeatherCell */,
 				B8FD54F62AFD5977006AC49E /* AppDelegate.swift */,
 				B8FD54F82AFD5977006AC49E /* SceneDelegate.swift */,
@@ -94,6 +99,15 @@
 				B85BB2082B166169002F3731 /* WeatherViewController.swift */,
 			);
 			path = WeatherWear;
+			sourceTree = "<group>";
+		};
+		B8FEBF972B166F6B000FBFAC /* AlarmListItem */ = {
+			isa = PBXGroup;
+			children = (
+				B8FEBF982B166F6B000FBFAC /* AlarmListItem+CoreDataClass.swift */,
+				B8FEBF992B166F6B000FBFAC /* AlarmListItem+CoreDataProperties.swift */,
+			);
+			path = AlarmListItem;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -173,7 +187,9 @@
 				B8FD54F72AFD5977006AC49E /* AppDelegate.swift in Sources */,
 				84A4ABD42B1035F10027DBDA /* CustomTableViewCell.swift in Sources */,
 				B8FD54F92AFD5977006AC49E /* SceneDelegate.swift in Sources */,
+				B8FEBF9B2B166F6B000FBFAC /* AlarmListItem+CoreDataProperties.swift in Sources */,
 				B85BB2092B166169002F3731 /* WeatherViewController.swift in Sources */,
+				B8FEBF9A2B166F6B000FBFAC /* AlarmListItem+CoreDataClass.swift in Sources */,
 				B85BB20D2B16625F002F3731 /* WeatherTableViewCell.swift in Sources */,
 				B8FD55012AFD5977006AC49E /* WeatherWear.xcdatamodeld in Sources */,
 				84A4ABD22B1034DD0027DBDA /* ClothesViewController.swift in Sources */,
@@ -417,4 +433,3 @@
 	};
 	rootObject = B8FD54EB2AFD5977006AC49E /* Project object */;
 }
-
