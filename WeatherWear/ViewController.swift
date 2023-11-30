@@ -78,13 +78,15 @@ class ViewController: UIViewController {
 
     }
     
+    
     @objc func weatherButtonTap() {
-        let weatherVC = WeatherViewController()
-        let navController = UINavigationController(rootViewController: weatherVC)
-        weatherVC.title = "Weather"
-
         let tabBarVC = UITabBarController()
-        tabBarVC.setViewControllers([navController], animated: false)
+        
+        let wvc = UINavigationController(rootViewController: WeatherViewController())
+        
+        wvc.title = "Alarm"
+        
+        tabBarVC.setViewControllers([wvc], animated: false)
         tabBarVC.modalPresentationStyle = .fullScreen
         tabBarVC.tabBar.isTranslucent = false
         tabBarVC.tabBar.backgroundColor = .white
@@ -92,6 +94,21 @@ class ViewController: UIViewController {
         present(tabBarVC, animated: true)
 
     }
+    
+//    @objc func weatherButtonTap() {
+//        let weatherVC = WeatherViewController()
+//        let navController = UINavigationController(rootViewController: weatherVC)
+//        weatherVC.title = "Weather"
+//
+//        let tabBarVC = UITabBarController()
+//        tabBarVC.setViewControllers([navController], animated: false)
+//        tabBarVC.modalPresentationStyle = .fullScreen
+//        tabBarVC.tabBar.isTranslucent = false
+//        tabBarVC.tabBar.backgroundColor = .white
+//        tabBarVC.tabBar.tintColor = .blue
+//        present(tabBarVC, animated: true)
+//
+//    }
     
     
     override func viewDidLayoutSubviews() {
