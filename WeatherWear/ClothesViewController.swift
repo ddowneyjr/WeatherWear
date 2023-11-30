@@ -89,6 +89,7 @@ class ClothesViewController: UIViewController{
 
 //used to supply behavior
 extension ClothesViewController: UITableViewDelegate{
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("Clicked: \(titleArray[indexPath.row])")
     }
