@@ -11,7 +11,7 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     private var models = [AlarmListItem]()
     
-    private var timeSelect = Date()
+    private var timePicker = UIDatePicker()
 
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
@@ -40,12 +40,15 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
 //    add functionality to choose a date
     @objc private func didTapAdd() {
-        let timePicker = UIDatePicker()
         timePicker.preferredDatePickerStyle = UIDatePickerStyle.wheels
         timePicker.setValue(UIColor.white, forKeyPath: "textColor")
         
         timePicker.datePickerMode = .time
         timePicker.addTarget(self, action: #selector(timePickerChange(sender:)), for: UIControl.Event.valueChanged)
+       
+        let gestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(backgroundTap(gesture:)));
+        self.view.addGestureRecognizer(gestureRecognizer)
+        
         timePicker.frame = CGRect(x: 0.0, y: (self.view.frame.height/2 + 60), width: self.view.frame.width, height: 150.0)
         timePicker.backgroundColor = .darkGray
         self.view.addSubview(timePicker)
@@ -55,6 +58,16 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
         print("tpc")
         let formatter = DateFormatter()
         formatter.dateFormat =  "hh:mm a"
+    }
+    
+    @objc private func backgroundTap(gesture: UITapGestureRecognizer) {
+        timeSelected(sender: timePicker)
+    }
+    
+    @objc private func timeSelected(sender: UIDatePicker) {
+        print("select")
+        createItem(dt: sender.date)
+        sender.removeFromSuperview()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
