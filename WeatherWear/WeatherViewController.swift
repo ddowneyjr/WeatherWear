@@ -23,9 +23,12 @@ class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     
     var forecast: Root? = nil
+    var currentWeather: CurrentDataItem? = nil
+    var currentTemp: Double? = nil
     
     
     let locationManager = CLLocationManager()
+    
     
     var currentLocation: CLLocation?
 
@@ -79,9 +82,27 @@ class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         let key = "4103885f8dc34c5b8374feaf9ba81ecf"
         
-//        let url = "https://api.weatherbit.io/v2.0/current?lat=\(lat)&lon=\(lon)&key=\(key)&units=I"
+        let currenturl = "https://api.weatherbit.io/v2.0/current?lat=\(lat)&lon=\(lon)&key=\(key)&units=I"
         let url = "https://api.weatherbit.io/v2.0/forecast/daily?lat=\(lat)&lon=\(lon)&key=\(key)&units=I"
         print(url)
+        
+        let currentApiService = CurrentAPIService(url: URL(string: currenturl))
+        currentApiService.fetchData { (root) in
+            guard let root = root else {
+                print("Error fetching data")
+                return
+            }
+            
+            print(root.data[0].temp)
+            print("______")
+            
+            self.currentWeather = root.data[0]
+            self.currentTemp = self.currentWeather?.temp
+            print(self.currentTemp!)
+            print(self.currentWeather!)
+            
+            
+        }
         
         let apiService = APIService(url: URL(string: url))
         apiService.fetchData { (root) in
@@ -109,6 +130,8 @@ class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
             
         }
+        
+        
     }
     
     func createTableHeader() -> UIView {
@@ -135,15 +158,15 @@ class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewD
         locationLabel.text = "Current Location"
         
 
-        guard let currentWeather = self.forecast else {
-            return UIView()
-        }
+//        guard let currentWeather = self.forecast else {
+//            return UIView()
+//        }
         
         
         
         cityLabel.text = forecast?.city_name
-
-        tempLabel.text = "\(models[0].temp)°"
+        
+        tempLabel.text = "\(self.currentTemp!)°"
         tempLabel.font = UIFont(name: "Helvetica-Bold", size: 32)
         summaryLabel.text = models[0].weather.description
 
@@ -209,7 +232,33 @@ struct APIService {
         }.resume()
     }
 }
+    
 
+struct CurrentAPIService {
+    let url: URL?
+
+    func fetchData(completion: @escaping (CurrentRoot?) -> Void) {
+        guard let url = url else {
+            print("Invalid URL")
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard let data = data else {
+                print("No data in response: \(error?.localizedDescription ?? "Unknown error")")
+                return
+            }
+            
+            do {
+                let root = try JSONDecoder().decode(CurrentRoot.self, from: data)
+                completion(root)
+            } catch {
+                print("Error decoding JSON: \(error)")
+                completion(nil)
+            }
+        }.resume()
+    }
+}
 
 }
 
@@ -283,55 +332,54 @@ struct Weather: Codable {
 
 // Structs for the current day weather
 
-//struct Weather: Codable {
-//    let code: Int
-//    let icon: String
-//    let description: String
-//}
-//
-//struct DataItem: Codable {
-//    let app_temp: Double
-//    let aqi: Double
-//    let city_name: String
-//    let clouds: Double
-//    let country_code: String
-//    let datetime: String
-//    let dewpt: Double
-//    let dhi: Double
-//    let dni: Double
-//    let elev_angle: Double
-//    let ghi: Double
-//    let gust: Double?
-//    let h_angle: Double
-//    let lat: Double
-//    let lon: Double
-//    let ob_time: String
-//    let pod: String
-//    let precip: Double
-//    let pres: Double
-//    let rh: Double
-//    let slp: Double
-//    let snow: Double
-//    let solar_rad: Double
-//    let sources: [String]
-//    let state_code: String
-//    let station: String
-//    let sunrise: String
-//    let sunset: String
-//    let temp: Double
-//    let timezone: String
-//    let ts: Double
-//    let uv: Double
-//    let vis: Double
-//    let weather: Weather
-//    let wind_cdir: String
-//    let wind_cdir_full: String
-//    let wind_dir: Double
-//    let wind_spd: Double
-//}
-//
-//struct Root: Codable {
-//    let count: Int
-//    let data: [DataItem]
-//}
+struct CurrentWeather: Codable {
+    let code: Int
+    let icon: String
+    let description: String
+}
 
+struct CurrentDataItem: Codable {
+    let app_temp: Double
+    let aqi: Double
+    let city_name: String
+    let clouds: Double
+    let country_code: String
+    let datetime: String
+    let dewpt: Double
+    let dhi: Double
+    let dni: Double
+    let elev_angle: Double
+    let ghi: Double
+    let gust: Double?
+    let h_angle: Double
+    let lat: Double
+    let lon: Double
+    let ob_time: String
+    let pod: String
+    let precip: Double
+    let pres: Double
+    let rh: Double
+    let slp: Double
+    let snow: Double
+    let solar_rad: Double
+    let sources: [String]
+    let state_code: String
+    let station: String
+    let sunrise: String
+    let sunset: String
+    let temp: Double
+    let timezone: String
+    let ts: Double
+    let uv: Double
+    let vis: Double
+    let weather: Weather
+    let wind_cdir: String
+    let wind_cdir_full: String
+    let wind_dir: Double
+    let wind_spd: Double
+}
+
+struct CurrentRoot: Codable {
+    let count: Int
+    let data: [CurrentDataItem]
+}
