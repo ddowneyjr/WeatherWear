@@ -17,7 +17,8 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     let tableView:UITableView = {
         let table = UITableView()
-        table.register(UITableViewCell.self, forCellReuseIdentifier: "alarmcell")
+//        table.register(UITableViewCell.self, forCellReuseIdentifier: "alarmcell")
+        table.register(AlarmCell.self, forCellReuseIdentifier: "alarmcell")
         return table
     }()
     
@@ -39,22 +40,21 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
 //    add functionality to choose a date
     @objc private func didTapAdd() {
-        var timePicker = UIDatePicker()
+        let timePicker = UIDatePicker()
         timePicker.preferredDatePickerStyle = UIDatePickerStyle.wheels
         timePicker.setValue(UIColor.white, forKeyPath: "textColor")
         
         timePicker.datePickerMode = .time
         timePicker.addTarget(self, action: #selector(timePickerChange(sender:)), for: UIControl.Event.valueChanged)
-        timePicker.frame = view.bounds
+        timePicker.frame = CGRect(x: 0.0, y: (self.view.frame.height/2 + 60), width: self.view.frame.width, height: 150.0)
         timePicker.backgroundColor = .darkGray
         self.view.addSubview(timePicker)
-//        timePicker.center = tableView.convert(tableView.center, from:tableView.superview)
     }
     
     @objc private func timePickerChange(sender: UIDatePicker) {
+        print("tpc")
         let formatter = DateFormatter()
         formatter.dateFormat =  "hh:mm a"
-//        timeSelect = formatter.string(from: sender.date)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -63,9 +63,23 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let model = models[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "alarmcell", for: indexPath) as! AlarmCell
+        cell.setButtonTitle(title: model.dateTime)
+        return cell
+    }
+    
+    func tableViewOld(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let model = models[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "alarmcell", for: indexPath)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "hh:mm a"
+        
+//       this button is used to bring up the time picker
+//        let button = UIButton()
+//       nil values shouldn't happen but if for whatever reason they do the default is current time
+//        button.setTitle(dateFormatter.string(from: model.dateTime ?? Date()), for: .normal)
+//        button.center = cell.center
+//        cell.addSubview(button)
         
 //       if for whatever reason the alarm has a nil date the default is the current date
         cell.textLabel?.text = dateFormatter.string(from: model.dateTime ?? Date())
