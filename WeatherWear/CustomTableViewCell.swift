@@ -62,7 +62,7 @@ class CustomTableViewCell: UITableViewCell {
             }
 
             // Set content size based on the total width of images
-            clothesScroll.contentSize = CGSize(width: xOffset, height: contentView.frame.height)
+            clothesScroll.contentSize = CGSize(width: xOffset, height: 100)
         }
     }
 
@@ -72,12 +72,12 @@ class CustomTableViewCell: UITableViewCell {
         contentView.addSubview(categoryText)
 
         // Adding scroll view
-        clothesScroll = UIScrollView(frame: CGRect(x: 5, y: 40, width: contentView.frame.width, height: 200))
+        clothesScroll = UIScrollView(frame: CGRect(x: 5, y: 40, width: contentView.frame.width, height: 100))
         contentView.addSubview(clothesScroll)
 
         // Set content size of the scroll view
-        let totalWidth = contentView.frame.width * CGFloat(titleArray.count)
-        clothesScroll.contentSize = CGSize(width: totalWidth, height: contentView.frame.height)
+        //let totalWidth = contentView.frame.width * CGFloat(titleArray.count)
+        //clothesScroll.contentSize = CGSize(width: totalWidth, height: contentView.frame.height)
     }
 
     required init?(coder: NSCoder) {
@@ -88,7 +88,7 @@ class CustomTableViewCell: UITableViewCell {
         super.layoutSubviews()
 
         categoryText.frame = CGRect(x: 5, y: 5, width: contentView.frame.size.width - 50, height: 25)
-        clothesScroll.frame = CGRect(x: 5, y: 40, width: contentView.frame.size.width - 10, height: 125)
+        clothesScroll.frame = CGRect(x: 5, y: 40, width: contentView.frame.size.width - 10, height: 100)
         
         //============= adding this line separates the cells but adds a white border i cant figure out how to change =============
         //contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
