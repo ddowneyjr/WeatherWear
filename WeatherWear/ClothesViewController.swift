@@ -25,11 +25,6 @@ class ClothesViewController: UIViewController{
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
-
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(animated)
-//        navigationController?.setNavigationBarHidden(false, animated: animated)
-//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,10 +34,6 @@ class ClothesViewController: UIViewController{
         //let barHeight: CGFloat = 0
         let displayWidth: CGFloat = self.view.frame.width
         //let displayHeight: CGFloat = self.view.frame.height
-        
-
-//        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backButtonTapped))
-//        self.navigationItem.leftBarButtonItem = backButton
         
         //adding back button
         let backButton = UIButton(type: .system)
@@ -59,12 +50,9 @@ class ClothesViewController: UIViewController{
         label.font = UIFont(name: "Verdana", size: 24)
       
         //setting table view
-        //tableView = UITableView(frame: CGRect(x: 50, y: barHeight+100, width: displayWidth, height: displayHeight - barHeight))
         tableView.backgroundColor = UIColor(red: 218/255.0, green: 182/255.0, blue: 236/255.0, alpha: 1.0)
         tableView.dataSource = self
         tableView.delegate = self
-        //tableView.rowHeight = UITableView.automaticDimension
-        
         
         //adding to subview
         self.view.addSubview(tableView)
@@ -98,12 +86,6 @@ extension ClothesViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 175
     }
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return 10
-//    }
-//    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-//        return 10
-//    }
 
 }
 
@@ -121,15 +103,6 @@ extension ClothesViewController: UITableViewDataSource {
         
         return cell
     }
-    
-//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        cell.backgroundColor = UIColor(red: 180/255.0, green: 93/255.0, blue: 224/255.0, alpha: 1.0)
-//
-//    }
-    
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//        return 1
-//    }
     
 }
 
