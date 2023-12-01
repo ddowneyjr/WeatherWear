@@ -2,6 +2,9 @@ import UIKit
 
 class CustomTableViewCell: UITableViewCell {
 
+    //WeatherSingleton
+    
+    
     static let identifier = "CustomTableViewCell"
 
     private let titleArray: NSArray = ["Hats", "Tops", "Bottoms", "Footwear", "OuterWear"]
