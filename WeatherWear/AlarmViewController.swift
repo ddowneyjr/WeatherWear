@@ -11,16 +11,39 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     private var models = [AlarmListItem]()
     
-    private var timeSelect = Date()
+    private var timePicker = UIDatePicker()
+    
+    private let timeFormat = {
+        let tf = DateFormatter()
+        tf.dateFormat = "hh:mm a"
+        return tf
+    }()
+    
+    private let sortTimeFormat = {
+        let tf = DateFormatter()
+        tf.dateFormat = "a hh:mm"
+        return tf
+    }()
 
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     let tableView:UITableView = {
         let table = UITableView()
-//        table.register(UITableViewCell.self, forCellReuseIdentifier: "alarmcell")
         table.register(AlarmCell.self, forCellReuseIdentifier: "alarmcell")
         return table
     }()
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+            if success {
+                print("got permission")
+            } else if let error = error {
+                print(error.localizedDescription)
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,22 +62,66 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
 //    add functionality to choose a date
-    @objc private func didTapAdd() {
-        let timePicker = UIDatePicker()
+    
+    @objc public func didTapAdd() {
+//       temp code to test notifications
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        let content = {
+            let c = UNMutableNotificationContent()
+            c.title = "test alarm"
+            c.subtitle = "test"
+            c.sound = UNNotificationSound.default
+            return c
+        }()
+        
+        var dateComp = DateComponents()
+        dateComp.calendar = Calendar.current
+        dateComp.hour = 15
+        dateComp.minute = 16
+        
+        let dTrigger = UNCalendarNotificationTrigger(dateMatching: dateComp, repeats: false)
+        
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: dTrigger)
+        UNUserNotificationCenter.current().add(request)
+        print("added request")
+        
+//       end temp code
         timePicker.preferredDatePickerStyle = UIDatePickerStyle.wheels
         timePicker.setValue(UIColor.white, forKeyPath: "textColor")
         
         timePicker.datePickerMode = .time
         timePicker.addTarget(self, action: #selector(timePickerChange(sender:)), for: UIControl.Event.valueChanged)
+       
+        let gestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(backgroundTap(gesture:)));
+        self.view.addGestureRecognizer(gestureRecognizer)
+        
         timePicker.frame = CGRect(x: 0.0, y: (self.view.frame.height/2 + 60), width: self.view.frame.width, height: 150.0)
         timePicker.backgroundColor = .darkGray
         self.view.addSubview(timePicker)
     }
     
     @objc private func timePickerChange(sender: UIDatePicker) {
-        print("tpc")
-        let formatter = DateFormatter()
-        formatter.dateFormat =  "hh:mm a"
+        timeFormat.dateFormat =  "hh:mm a"
+    }
+    
+    @objc private func backgroundTap(gesture: UITapGestureRecognizer) {
+        timeSelected(sender: timePicker)
+    }
+    
+    @objc private func timeSelected(sender: UIDatePicker) {
+        print("select")
+        createItem(dt: sender.date)
+        sender.removeFromSuperview()
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+//            deleteItem(item: models[indexPath.row])
+            deleteItem(item: models.remove(at: indexPath.row))
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        } else if editingStyle == .insert {
+//           do nothng
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -62,31 +129,17 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        models.sort(by: {sortTimeFormat.string(from: $0.dateTime!) < sortTimeFormat.string(from: $1.dateTime!)})
         let model = models[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "alarmcell", for: indexPath) as! AlarmCell
         cell.setButtonTitle(title: model.dateTime)
-        return cell
-    }
-    
-    func tableViewOld(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let model = models[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "alarmcell", for: indexPath)
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "hh:mm a"
-        
-//       this button is used to bring up the time picker
-//        let button = UIButton()
-//       nil values shouldn't happen but if for whatever reason they do the default is current time
-//        button.setTitle(dateFormatter.string(from: model.dateTime ?? Date()), for: .normal)
-//        button.center = cell.center
-//        cell.addSubview(button)
-        
-//       if for whatever reason the alarm has a nil date the default is the current date
-        cell.textLabel?.text = dateFormatter.string(from: model.dateTime ?? Date())
+//        UNUserNotificationCenter.current().add(<#T##request: UNNotificationRequest##UNNotificationRequest#>)
         return cell
     }
    
+//   add sort feature to sort by Time
     func getAllItems() {
+        models.sort(by: {sortTimeFormat.string(from: $0.dateTime!) < sortTimeFormat.string(from: $1.dateTime!)})
         do {
             models = try context.fetch(AlarmListItem.fetchRequest())
             DispatchQueue.main.async {
@@ -137,12 +190,13 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
             try context.save()
         }
         catch {
-//           ToDo
+           print("delete failed to context save")
         }
     }
     
 //   ToDo
     func updateItem(item: AlarmListItem) {
     }
+    
 }
 
