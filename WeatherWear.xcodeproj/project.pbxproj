@@ -11,6 +11,7 @@
 		84A4ABD42B1035F10027DBDA /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A4ABD32B1035F10027DBDA /* CustomTableViewCell.swift */; };
 		8E4EDF5B2B0299F7007DBFEB /* AlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4EDF5A2B0299F7007DBFEB /* AlarmViewController.swift */; };
 		B855C9D42B18FEEB003D17A0 /* AlarmCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B855C9D32B18FEEB003D17A0 /* AlarmCustomCell.swift */; };
+		B855C9D62B190FEF003D17A0 /* WeatherSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B855C9D52B190FEF003D17A0 /* WeatherSingleton.swift */; };
 		B85BB2092B166169002F3731 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85BB2082B166169002F3731 /* WeatherViewController.swift */; };
 		B85BB20C2B16625F002F3731 /* WeatherTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B85BB20A2B16625F002F3731 /* WeatherTableViewCell.xib */; };
 		B85BB20D2B16625F002F3731 /* WeatherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85BB20B2B16625F002F3731 /* WeatherTableViewCell.swift */; };
@@ -30,6 +31,7 @@
 		84A4ABD32B1035F10027DBDA /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		8E4EDF5A2B0299F7007DBFEB /* AlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmViewController.swift; sourceTree = "<group>"; };
 		B855C9D32B18FEEB003D17A0 /* AlarmCustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmCustomCell.swift; sourceTree = "<group>"; };
+		B855C9D52B190FEF003D17A0 /* WeatherSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherSingleton.swift; sourceTree = "<group>"; };
 		B85BB2082B166169002F3731 /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 		B85BB20A2B16625F002F3731 /* WeatherTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeatherTableViewCell.xib; sourceTree = "<group>"; };
 		B85BB20B2B16625F002F3731 /* WeatherTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherTableViewCell.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 				B8FD55072AFD5978006AC49E /* Info.plist */,
 				B8FD54FF2AFD5977006AC49E /* WeatherWear.xcdatamodeld */,
 				B85BB2082B166169002F3731 /* WeatherViewController.swift */,
+				B855C9D52B190FEF003D17A0 /* WeatherSingleton.swift */,
 			);
 			path = WeatherWear;
 			sourceTree = "<group>";
@@ -193,6 +196,7 @@
 				B8FD54F92AFD5977006AC49E /* SceneDelegate.swift in Sources */,
 				B8FEBF9B2B166F6B000FBFAC /* AlarmListItem+CoreDataProperties.swift in Sources */,
 				B85BB2092B166169002F3731 /* WeatherViewController.swift in Sources */,
+				B855C9D62B190FEF003D17A0 /* WeatherSingleton.swift in Sources */,
 				B8FEBF9A2B166F6B000FBFAC /* AlarmListItem+CoreDataClass.swift in Sources */,
 				B85BB20D2B16625F002F3731 /* WeatherTableViewCell.swift in Sources */,
 				B8FD55012AFD5977006AC49E /* WeatherWear.xcdatamodeld in Sources */,
