@@ -12,12 +12,23 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
     private var models = [AlarmListItem]()
     
     private var timePicker = UIDatePicker()
+    
+    private let timeFormat = {
+        let tf = DateFormatter()
+        tf.dateFormat = "hh:mm a"
+        return tf
+    }()
+    
+    private let sortTimeFormat = {
+        let tf = DateFormatter()
+        tf.dateFormat = "a hh:mm"
+        return tf
+    }()
 
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     let tableView:UITableView = {
         let table = UITableView()
-//        table.register(UITableViewCell.self, forCellReuseIdentifier: "alarmcell")
         table.register(AlarmCell.self, forCellReuseIdentifier: "alarmcell")
         return table
     }()
@@ -56,8 +67,7 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     @objc private func timePickerChange(sender: UIDatePicker) {
         print("tpc")
-        let formatter = DateFormatter()
-        formatter.dateFormat =  "hh:mm a"
+        timeFormat.dateFormat =  "hh:mm a"
     }
     
     @objc private func backgroundTap(gesture: UITapGestureRecognizer) {
@@ -75,31 +85,16 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        models.sort(by: {sortTimeFormat.string(from: $0.dateTime!) < sortTimeFormat.string(from: $1.dateTime!)})
         let model = models[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "alarmcell", for: indexPath) as! AlarmCell
         cell.setButtonTitle(title: model.dateTime)
         return cell
     }
-    
-    func tableViewOld(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let model = models[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "alarmcell", for: indexPath)
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "hh:mm a"
-        
-//       this button is used to bring up the time picker
-//        let button = UIButton()
-//       nil values shouldn't happen but if for whatever reason they do the default is current time
-//        button.setTitle(dateFormatter.string(from: model.dateTime ?? Date()), for: .normal)
-//        button.center = cell.center
-//        cell.addSubview(button)
-        
-//       if for whatever reason the alarm has a nil date the default is the current date
-        cell.textLabel?.text = dateFormatter.string(from: model.dateTime ?? Date())
-        return cell
-    }
    
+//   add sort feature to sort by Time
     func getAllItems() {
+        models.sort(by: {sortTimeFormat.string(from: $0.dateTime!) < sortTimeFormat.string(from: $1.dateTime!)})
         do {
             models = try context.fetch(AlarmListItem.fetchRequest())
             DispatchQueue.main.async {
