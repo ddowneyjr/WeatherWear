@@ -64,6 +64,28 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
 //    add functionality to choose a date
     
     @objc public func didTapAdd() {
+//       temp code to test notifications
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        let content = {
+            let c = UNMutableNotificationContent()
+            c.title = "test alarm"
+            c.subtitle = "test"
+            c.sound = UNNotificationSound.default
+            return c
+        }()
+        
+        var dateComp = DateComponents()
+        dateComp.calendar = Calendar.current
+        dateComp.hour = 15
+        dateComp.minute = 16
+        
+        let dTrigger = UNCalendarNotificationTrigger(dateMatching: dateComp, repeats: false)
+        
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: dTrigger)
+        UNUserNotificationCenter.current().add(request)
+        print("added request")
+        
+//       end temp code
         timePicker.preferredDatePickerStyle = UIDatePickerStyle.wheels
         timePicker.setValue(UIColor.white, forKeyPath: "textColor")
         
@@ -92,6 +114,16 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
         sender.removeFromSuperview()
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+//            deleteItem(item: models[indexPath.row])
+            deleteItem(item: models.remove(at: indexPath.row))
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        } else if editingStyle == .insert {
+//           do nothng
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return models.count
     }
@@ -101,7 +133,7 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let model = models[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "alarmcell", for: indexPath) as! AlarmCell
         cell.setButtonTitle(title: model.dateTime)
-        UNUserNotificationCenter.current().add(<#T##request: UNNotificationRequest##UNNotificationRequest#>)
+//        UNUserNotificationCenter.current().add(<#T##request: UNNotificationRequest##UNNotificationRequest#>)
         return cell
     }
    
@@ -158,12 +190,13 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
             try context.save()
         }
         catch {
-//           ToDo
+           print("delete failed to context save")
         }
     }
     
 //   ToDo
     func updateItem(item: AlarmListItem) {
     }
+    
 }
 

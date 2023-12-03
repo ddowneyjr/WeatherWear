@@ -14,10 +14,12 @@ class AlarmCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        self.backgroundColor = .darkGray
+        
         dateFormatter.dateFormat = "hh:mm a"
         
         button.center = self.center
-        button.backgroundColor = .blue
+        button.backgroundColor = .darkGray
         button.frame = self.frame
         
         
