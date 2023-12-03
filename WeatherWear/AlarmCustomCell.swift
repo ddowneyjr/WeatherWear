@@ -20,7 +20,6 @@ class AlarmCell: UITableViewCell {
         button.backgroundColor = .blue
         button.frame = self.frame
         
-//        button.addTarget(target: self, action: #selector(buttonTap), for: touchUpInside)
         
         self.addSubview(button)
 //        self.textLabel?.text = "hello"

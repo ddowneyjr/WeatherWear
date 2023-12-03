@@ -33,6 +33,18 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return table
     }()
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+            if success {
+                print("got permission")
+            } else if let error = error {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .darkGray
@@ -50,7 +62,8 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
 //    add functionality to choose a date
-    @objc private func didTapAdd() {
+    
+    @objc public func didTapAdd() {
         timePicker.preferredDatePickerStyle = UIDatePickerStyle.wheels
         timePicker.setValue(UIColor.white, forKeyPath: "textColor")
         
@@ -66,7 +79,6 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     @objc private func timePickerChange(sender: UIDatePicker) {
-        print("tpc")
         timeFormat.dateFormat =  "hh:mm a"
     }
     
@@ -89,6 +101,7 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let model = models[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "alarmcell", for: indexPath) as! AlarmCell
         cell.setButtonTitle(title: model.dateTime)
+        UNUserNotificationCenter.current().add(<#T##request: UNNotificationRequest##UNNotificationRequest#>)
         return cell
     }
    
