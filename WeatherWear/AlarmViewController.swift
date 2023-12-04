@@ -6,12 +6,15 @@
 //
 
 import UIKit
+import EventKit
+import NotificationCenter
 
-class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
-    
+class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AlarmCellSubscriber{
     private var models = [AlarmListItem]()
     
     private var timePicker = UIDatePicker()
+    
+    private let eventStore = EKEventStore()
     
     private let timeFormat = {
         let tf = DateFormatter()
@@ -43,6 +46,45 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 print(error.localizedDescription)
             }
         }
+//        
+//        eventStore.requestAccess(to: .event) { success, error  in
+//            if success {
+//                print("got permission")
+//            } else if let error = error {
+//                print(error.localizedDescription)
+//            }
+//        }
+        
+        getEventPerm()
+       
+    }
+    
+    func getEventPerm() {
+//        commented out because not required for the notification type we are using
+//
+//        if #available(iOS 17.0, *) {
+//            print("getting event permission")
+//            eventStore.requestFullAccessToEvents() { success, error in
+//                if success {
+//                    print("event perms")
+//                } else if let error = error {
+//                    print(error.localizedDescription)
+//                }
+//            }
+//        } else {
+//            // Fallback on earlier versions
+//            print("wrong version bad news")
+//        }
+//        eventStore.requestAccess(to: .event, completion: {(accessGranted: Bool, error: Error?) in
+//
+//            if accessGranted == true {
+//                print("Access Has Been Granted")
+//                }
+//            else {
+//                print("Change Settings to Allow Access")
+//            }
+//            })
+        
     }
     
     override func viewDidLoad() {
@@ -64,28 +106,7 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
 //    add functionality to choose a date
     
     @objc public func didTapAdd() {
-//       temp code to test notifications
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-        let content = {
-            let c = UNMutableNotificationContent()
-            c.title = "test alarm"
-            c.subtitle = "test"
-            c.sound = UNNotificationSound.default
-            return c
-        }()
-        
-        var dateComp = DateComponents()
-        dateComp.calendar = Calendar.current
-        dateComp.hour = 15
-        dateComp.minute = 16
-        
-        let dTrigger = UNCalendarNotificationTrigger(dateMatching: dateComp, repeats: false)
-        
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: dTrigger)
-        UNUserNotificationCenter.current().add(request)
-        print("added request")
-        
-//       end temp code
+
         timePicker.preferredDatePickerStyle = UIDatePickerStyle.wheels
         timePicker.setValue(UIColor.white, forKeyPath: "textColor")
         
@@ -116,7 +137,6 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-//            deleteItem(item: models[indexPath.row])
             deleteItem(item: models.remove(at: indexPath.row))
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
@@ -128,15 +148,79 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return models.count
     }
     
+    func scheduleAlarm (item: AlarmListItem) {
+//        update this with weather and clothing information
+        let content = {
+            let c = UNMutableNotificationContent()
+            c.title = "test alarm"
+            c.subtitle = "test"
+            c.sound = UNNotificationSound.default
+            return c
+        }()
+        
+        var dateComp = DateComponents()
+        dateComp.calendar = Calendar.current
+        dateComp.hour = Calendar.current.component(.hour, from: item.dateTime ?? Date())
+        dateComp.minute = Calendar.current.component(.minute, from: item.dateTime ?? Date())
+        
+        let dTrigger = UNCalendarNotificationTrigger(dateMatching: dateComp, repeats: true)
+        
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: dTrigger)
+        UNUserNotificationCenter.current().add(request)
+        
+//        This code does not do what I hoped adding events to the calander still results in the same type of notification
+//
+        
+//        let d = timeFormat.date(from: timeFormat.string(from: item.dateTime ?? Date()))
+//        let currentStatus = EKEventStore.authorizationStatus(for: EKEntityType.event)
+//        if currentStatus == EKAuthorizationStatus.notDetermined {
+//            print("dont know")
+//            getEventPerm()
+//        } else if currentStatus == EKAuthorizationStatus.authorized {
+//            print("good to go")
+//        } else {
+//            print("not good")
+//            getEventPerm()
+//        }
+//        let event = {
+//            let e = EKEvent(eventStore: eventStore)
+//            e.title =  "Alarm!"
+//            e.notes = "alarm"
+//            e.calendar = eventStore.defaultCalendarForNewEvents
+//            e.startDate = item.dateTime?.addingTimeInterval(60)
+//            e.endDate = item.dateTime?.addingTimeInterval(120)
+//            return e
+//        }()
+//        
+//        
+//        let alarm = EKAlarm(relativeOffset: -60)
+//        event.addAlarm(alarm)
+//    
+//        do {
+//            try eventStore.save(event, span: .thisEvent)
+//        } catch {
+//            print("uh oh")
+//        }
+//        
+//        let e = eventStore.events(matching: eventStore.predicateForEvents(withStart: item.dateTime?.addingTimeInterval(60) ?? Date(), end: item.dateTime?.addingTimeInterval(60) ?? Date(), calendars: nil))
+//        if e.count == 0{
+//            print("not added")
+//        }
+        
+        print("added request")
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         models.sort(by: {sortTimeFormat.string(from: $0.dateTime!) < sortTimeFormat.string(from: $1.dateTime!)})
         let model = models[indexPath.row]
+        scheduleAlarm(item: model)
         let cell = tableView.dequeueReusableCell(withIdentifier: "alarmcell", for: indexPath) as! AlarmCell
+        cell.addSubscriber(sub: self)
         cell.setButtonTitle(title: model.dateTime)
-//        UNUserNotificationCenter.current().add(<#T##request: UNNotificationRequest##UNNotificationRequest#>)
+        cell.path = indexPath
         return cell
     }
-   
+    
 //   add sort feature to sort by Time
     func getAllItems() {
         models.sort(by: {sortTimeFormat.string(from: $0.dateTime!) < sortTimeFormat.string(from: $1.dateTime!)})
@@ -196,6 +280,15 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
 //   ToDo
     func updateItem(item: AlarmListItem) {
+    }
+   
+//    lets use something better in the future that doesn't involve deleting the element
+    func alarmUpdate(index: IndexPath?) {
+        print("alarm update")
+        let i = index ?? IndexPath(index: 0)
+        deleteItem(item: models.remove(at: i.row))
+        tableView.deleteRows(at: [i], with: .fade)
+        didTapAdd()
     }
     
 }
