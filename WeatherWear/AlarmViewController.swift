@@ -87,6 +87,12 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
     }
     
+    //hide top nav bar
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        navigationController?.setNavigationBarHidden(true, animated: animated)
+//    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .darkGray
@@ -98,9 +104,26 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
         tableView.frame = view.bounds
         tableView.backgroundColor = .lightGray
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapAdd))
+        //adding back button
+        let backButton = {
+            let b = UIBarButtonItem(title: "", image: UIImage(systemName: "arrow.left"), target: self, action: #selector(backButtonTapped))
+            b.tintColor = .white
+            return b
+        }()
+        
+        navigationItem.leftBarButtonItem = backButton
+        
+        navigationItem.rightBarButtonItem = {
+            let t = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapAdd))
+            t.tintColor = .white
+            return t
+        }()
         
         getAllItems()
+    }
+    
+    @objc func backButtonTapped() {
+        dismiss(animated: true, completion: nil)
     }
     
 //    add functionality to choose a date
