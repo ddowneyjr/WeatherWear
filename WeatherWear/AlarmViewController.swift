@@ -9,8 +9,7 @@ import UIKit
 import EventKit
 import NotificationCenter
 
-class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
-    
+class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AlarmCellSubscriber{
     private var models = [AlarmListItem]()
     
     private var timePicker = UIDatePicker()
@@ -216,10 +215,12 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let model = models[indexPath.row]
         scheduleAlarm(item: model)
         let cell = tableView.dequeueReusableCell(withIdentifier: "alarmcell", for: indexPath) as! AlarmCell
+        cell.addSubscriber(sub: self)
         cell.setButtonTitle(title: model.dateTime)
+        cell.path = indexPath
         return cell
     }
-   
+    
 //   add sort feature to sort by Time
     func getAllItems() {
         models.sort(by: {sortTimeFormat.string(from: $0.dateTime!) < sortTimeFormat.string(from: $1.dateTime!)})
@@ -279,6 +280,15 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
 //   ToDo
     func updateItem(item: AlarmListItem) {
+    }
+   
+//    lets use something better in the future that doesn't involve deleting the element
+    func alarmUpdate(index: IndexPath?) {
+        print("alarm update")
+        let i = index ?? IndexPath(index: 0)
+        deleteItem(item: models.remove(at: i.row))
+        tableView.deleteRows(at: [i], with: .fade)
+        didTapAdd()
     }
     
 }
