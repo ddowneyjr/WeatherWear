@@ -8,13 +8,15 @@
 
 import Foundation
 import CoreLocation
+import UIKit
 
 class WeatherSingleton: NSObject, CLLocationManagerDelegate {
     
     private static var myInstance = WeatherSingleton()
     
     
-
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    private var lastCall: DateEntitity?
     
     
     let locationManager = CLLocationManager()
@@ -59,6 +61,7 @@ class WeatherSingleton: NSObject, CLLocationManagerDelegate {
             return
         }
         
+        
         let lon = currentLocation.coordinate.longitude
         let lat = currentLocation.coordinate.latitude
         
@@ -70,42 +73,52 @@ class WeatherSingleton: NSObject, CLLocationManagerDelegate {
         let url = "https://api.weatherbit.io/v2.0/forecast/daily?lat=\(lat)&lon=\(lon)&key=\(key)&units=I"
         print(url)
         
-        let currentApiService = CurrentAPIService(url: URL(string: currenturl))
-        currentApiService.fetchData { (root) in
-            guard let root = root else {
-                print("Error fetching data")
-                return
+        if Date().addingTimeInterval(-1800) > lastCall?.date ?? Date().addingTimeInterval(-20000){
+            let currentApiService = CurrentAPIService(url: URL(string: currenturl))
+            currentApiService.fetchData { (root) in
+                guard let root = root else {
+                    print("Error fetching data")
+                    return
+                }
+                
+                print(root.data[0].temp)
+                print("______")
+                
+                self.currentWeather = root.data[0]
+                self.currentTemp = self.currentWeather?.temp
+                print(self.currentTemp!)
+                print(self.currentWeather!)
+                
+                
             }
             
-            print(root.data[0].temp)
-            print("______")
-            
-            self.currentWeather = root.data[0]
-            self.currentTemp = self.currentWeather?.temp
-            print(self.currentTemp!)
-            print(self.currentWeather!)
-            
-            
+            let apiService = APIService(url: URL(string: url))
+            apiService.fetchData { (root) in
+                guard let root = root else {
+                    print("Error fetching data")
+                    return
+                }
+                
+                print(root.data[0].temp)
+                
+                self.forecast = root
+                
+                self.models = self.forecast!.data
+                
+                
+                completion()
+                
+                
+            }
+            lastCall = {
+                let d = DateEntitity(context: context)
+                d.date = Date()
+                return d
+            }()
         }
-        
-        let apiService = APIService(url: URL(string: url))
-        apiService.fetchData { (root) in
-            guard let root = root else {
-                print("Error fetching data")
-                return
-            }
-            
-            print(root.data[0].temp)
-            
-            self.forecast = root
-            
-            self.models = self.forecast!.data
-            
+        else {
             completion()
-            
-            
         }
-        
         
     }
 }

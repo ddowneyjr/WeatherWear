@@ -10,6 +10,8 @@
 		84A4ABD22B1034DD0027DBDA /* ClothesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A4ABD12B1034DD0027DBDA /* ClothesViewController.swift */; };
 		84A4ABD42B1035F10027DBDA /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A4ABD32B1035F10027DBDA /* CustomTableViewCell.swift */; };
 		8E4EDF5B2B0299F7007DBFEB /* AlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4EDF5A2B0299F7007DBFEB /* AlarmViewController.swift */; };
+		8EECE5E52B1E4DAC009A25D5 /* DateEntitity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EECE5E32B1E4DAC009A25D5 /* DateEntitity+CoreDataClass.swift */; };
+		8EECE5E62B1E4DAC009A25D5 /* DateEntitity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EECE5E42B1E4DAC009A25D5 /* DateEntitity+CoreDataProperties.swift */; };
 		B855C9D42B18FEEB003D17A0 /* AlarmCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B855C9D32B18FEEB003D17A0 /* AlarmCustomCell.swift */; };
 		B855C9D62B190FEF003D17A0 /* WeatherSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B855C9D52B190FEF003D17A0 /* WeatherSingleton.swift */; };
 		B85BB2092B166169002F3731 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85BB2082B166169002F3731 /* WeatherViewController.swift */; };
@@ -32,6 +34,8 @@
 		84A4ABD12B1034DD0027DBDA /* ClothesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothesViewController.swift; sourceTree = "<group>"; };
 		84A4ABD32B1035F10027DBDA /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		8E4EDF5A2B0299F7007DBFEB /* AlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmViewController.swift; sourceTree = "<group>"; };
+		8EECE5E32B1E4DAC009A25D5 /* DateEntitity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateEntitity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		8EECE5E42B1E4DAC009A25D5 /* DateEntitity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateEntitity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B855C9D32B18FEEB003D17A0 /* AlarmCustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmCustomCell.swift; sourceTree = "<group>"; };
 		B855C9D52B190FEF003D17A0 /* WeatherSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherSingleton.swift; sourceTree = "<group>"; };
 		B85BB2082B166169002F3731 /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
@@ -63,6 +67,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8EECE5E72B1E4DB8009A25D5 /* DateEntity */ = {
+			isa = PBXGroup;
+			children = (
+				8EECE5E32B1E4DAC009A25D5 /* DateEntitity+CoreDataClass.swift */,
+				8EECE5E42B1E4DAC009A25D5 /* DateEntitity+CoreDataProperties.swift */,
+			);
+			path = DateEntity;
+			sourceTree = "<group>";
+		};
 		B85BB20E2B166267002F3731 /* WeatherCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -75,6 +88,7 @@
 		B8FD54EA2AFD5977006AC49E = {
 			isa = PBXGroup;
 			children = (
+				8EECE5E72B1E4DB8009A25D5 /* DateEntity */,
 				B8FD54F52AFD5977006AC49E /* WeatherWear */,
 				B8FD54F42AFD5977006AC49E /* Products */,
 			);
@@ -198,7 +212,9 @@
 			files = (
 				8E4EDF5B2B0299F7007DBFEB /* AlarmViewController.swift in Sources */,
 				B8FD54FB2AFD5977006AC49E /* ViewController.swift in Sources */,
+				8EECE5E52B1E4DAC009A25D5 /* DateEntitity+CoreDataClass.swift in Sources */,
 				B8FD54F72AFD5977006AC49E /* AppDelegate.swift in Sources */,
+				8EECE5E62B1E4DAC009A25D5 /* DateEntitity+CoreDataProperties.swift in Sources */,
 				84A4ABD42B1035F10027DBDA /* CustomTableViewCell.swift in Sources */,
 				B855C9D42B18FEEB003D17A0 /* AlarmCustomCell.swift in Sources */,
 				B8FD54F92AFD5977006AC49E /* SceneDelegate.swift in Sources */,
