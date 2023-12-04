@@ -46,12 +46,34 @@ class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         view.backgroundColor = UIColor(red: 52/255.0, green: 109/255.0, blue: 179/255.0, alpha: 1.0)
         
+        //adding back button
+        let backButton = UIButton(type: .system)
+        backButton.setImage(UIImage(systemName: "arrow.left"), for: .normal)
+        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        backButton.frame = CGRect(x: 16, y: 50, width: 30, height: 30)
+        backButton.tintColor = .white
+        
+        
+//        navigationItem.leftBarButtonItem = backButton
+        
         self.view.addSubview(table)
+        self.view.addSubview(backButton)
         table.frame = view.bounds
         
         table.delegate = self
         table.dataSource = self
    
+        
+    }
+    
+    //hide top nav bar
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    @objc func backButtonTapped() {
+        dismiss(animated: true, completion: nil)
         
     }
     
@@ -210,7 +232,7 @@ class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewD
     // Table
     
     func numberOfSections(in tableView: UITableView) -> Int {
-            return 2
+            return 1
         }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
