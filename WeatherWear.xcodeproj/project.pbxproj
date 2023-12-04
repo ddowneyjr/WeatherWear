@@ -88,7 +88,6 @@
 		B8FD54EA2AFD5977006AC49E = {
 			isa = PBXGroup;
 			children = (
-				8EECE5E72B1E4DB8009A25D5 /* DateEntity */,
 				B8FD54F52AFD5977006AC49E /* WeatherWear */,
 				B8FD54F42AFD5977006AC49E /* Products */,
 			);
@@ -105,6 +104,7 @@
 		B8FD54F52AFD5977006AC49E /* WeatherWear */ = {
 			isa = PBXGroup;
 			children = (
+				8EECE5E72B1E4DB8009A25D5 /* DateEntity */,
 				B8FEBF972B166F6B000FBFAC /* AlarmListItem */,
 				B85BB20E2B166267002F3731 /* WeatherCell */,
 				B8FD54F62AFD5977006AC49E /* AppDelegate.swift */,

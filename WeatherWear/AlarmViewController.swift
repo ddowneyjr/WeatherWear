@@ -54,12 +54,12 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
 //                print(error.localizedDescription)
 //            }
 //        }
-        
-        getEventPerm()
+//        
+//        getEventPerm()
        
     }
     
-    func getEventPerm() {
+//    func getEventPerm() {
 //        commented out because not required for the notification type we are using
 //
 //        if #available(iOS 17.0, *) {
@@ -84,8 +84,8 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
 //                print("Change Settings to Allow Access")
 //            }
 //            })
-        
-    }
+//        
+//    }
     
     //hide top nav bar
 //    override func viewWillAppear(_ animated: Bool) {

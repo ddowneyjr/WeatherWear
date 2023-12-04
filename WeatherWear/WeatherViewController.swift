@@ -90,7 +90,8 @@ class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewD
             self.currentWeather = self.weatherSingleton?.currentWeather
             self.currentTemp = self.weatherSingleton?.currentTemp
             self.forecast = self.weatherSingleton?.forecast
-            self.models = self.weatherSingleton!.models
+            self.models = self.weatherSingleton?.models ?? []
+            
                 
             // Update the UI on the main thread
             DispatchQueue.main.async {
@@ -216,9 +217,13 @@ class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         cityLabel.text = forecast?.city_name
         
-        tempLabel.text = "\(self.currentTemp!)°"
+        tempLabel.text = "\(self.currentTemp ?? -1000)°"
         tempLabel.font = UIFont(name: "Helvetica-Bold", size: 32)
-        summaryLabel.text = models[0].weather.description
+        if models.count > 0 {
+            summaryLabel.text = models[0].weather.description
+        } else {
+            summaryLabel.text = "error"
+        }
 
         return headerVIew
     }
