@@ -22,7 +22,7 @@ class WeatherSingleton: NSObject, CLLocationManagerDelegate {
     var currentWeather: CurrentDataItem?
     var currentTemp: Double?
     var forecast: Root?
-    
+    var models = [WeatherData]()
     
     private override init() {
         super.init()
@@ -97,6 +97,8 @@ class WeatherSingleton: NSObject, CLLocationManagerDelegate {
             print(root.data[0].temp)
             
             self.forecast = root
+            
+            self.models = self.forecast!.data
             
             completion()
             

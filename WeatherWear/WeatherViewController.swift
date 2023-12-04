@@ -68,7 +68,7 @@ class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewD
             self.currentWeather = self.weatherSingleton?.currentWeather
             self.currentTemp = self.weatherSingleton?.currentTemp
             self.forecast = self.weatherSingleton?.forecast
-            self.models = self.forecast!.data
+            self.models = self.weatherSingleton!.models
                 
             // Update the UI on the main thread
             DispatchQueue.main.async {

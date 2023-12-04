@@ -10,6 +10,8 @@ import UIKit
 class ViewController: UIViewController {
     
     let tabBarVC = UITabBarController()
+    
+    var weatherSingleton: WeatherSingleton? = nil
 
     private let alarmButton: UIButton = {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 52))
@@ -51,7 +53,13 @@ class ViewController: UIViewController {
         view.addSubview(weatherButton)
         weatherButton.addTarget(self, action: #selector(weatherButtonTap), for: .touchUpInside)
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        weatherSingleton = WeatherSingleton.getInstance()
+    }
    
+    
     @objc func alarmButtonTap() {
         
         
