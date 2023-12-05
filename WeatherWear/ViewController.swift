@@ -21,16 +21,16 @@ class ViewController: UIViewController {
     }()
 
     private let alarmButton: UIButton = {
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 52))
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 100))
         button.setTitle("Alarm", for: .normal)
-        button.backgroundColor = .darkGray
+        button.backgroundColor =  UIColor(red: 142/255.0, green: 142/255.0, blue: 147/255.0, alpha: 1.0)
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 10
         return button
     }()
     
     private let clothesButton : UIButton = {
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 52))
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 100))
         button.setTitle("Clothes", for: .normal)
         button.backgroundColor =  UIColor(red: 175/255.0, green: 82/255.0, blue: 222/255.0, alpha: 1.0)
         button.setTitleColor(.white, for: .normal)
@@ -39,7 +39,7 @@ class ViewController: UIViewController {
     }()
     
     private let weatherButton : UIButton = {
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 52))
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 100))
         button.setTitle("Weather", for: .normal)
         button.backgroundColor = UIColor(red: 91/255.0, green: 201/255.0, blue: 250/255.0, alpha: 1.0)
         button.setTitleColor(.white, for: .normal)
