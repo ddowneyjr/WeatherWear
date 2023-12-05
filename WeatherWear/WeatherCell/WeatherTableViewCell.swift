@@ -38,6 +38,9 @@ class WeatherTableViewCell: UITableViewCell {
         
 //        self.lowTempLabel.text = "12°"
 //        self.highTempLabel.text = "25°"
+        self.lowTempLabel.textColor = .white
+        self.highTempLabel.textColor = .white
+        self.dayLabel.textColor = .white
         
         
         print(self.lowTempLabel.text!)
