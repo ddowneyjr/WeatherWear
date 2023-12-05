@@ -99,8 +99,10 @@ class CustomTableViewCell: UITableViewCell {
         categoryText.frame = CGRect(x: 5, y: 5, width: contentView.frame.size.width - 50, height: 25)
         clothesScroll.frame = CGRect(x: 5, y: 40, width: contentView.frame.size.width - 10, height: 100)
         
-        //============= adding this line separates the cells but adds a white border i cant figure out how to change =============
-        //contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
+        //round and separate the cells
+        contentView.layer.cornerRadius = 15
+        contentView.layer.masksToBounds = true
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 5))
     }
     
     func getWeather() -> [String: [UIImageView]] {

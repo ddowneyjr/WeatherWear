@@ -100,6 +100,9 @@ extension ClothesViewController: UITableViewDataSource {
         
         let category = titleArray[indexPath.row] as! String
         cell.configure(category: category)
+        cell.backgroundColor = UIColor(red: 218/255.0, green: 182/255.0, blue: 236/255.0, alpha: 1.0)
+        tableView.separatorStyle = .none
+
         
         return cell
     }
