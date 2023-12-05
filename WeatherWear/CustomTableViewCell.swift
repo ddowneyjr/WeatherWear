@@ -149,7 +149,7 @@ class CustomTableViewCell: UITableViewCell {
             
             //outerwear
             tempClothes.append(UIImageView(image: UIImage(named: "sweater")))
-            tempClothes.append(UIImageView(image: UIImage(named: "warm jacket")))
+            tempClothes.append(UIImageView(image: UIImage(named: "warmjacket")))
             imageDict["Outerwear"] = tempClothes
             
         }else if(temp > 30 && temp <= 65){
