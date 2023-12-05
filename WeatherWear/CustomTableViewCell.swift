@@ -83,6 +83,7 @@ class CustomTableViewCell: UITableViewCell {
         // Set content size of the scroll view
         //let totalWidth = contentView.frame.width * CGFloat(titleArray.count)
         //clothesScroll.contentSize = CGSize(width: totalWidth, height: contentView.frame.height)
+        
         categoryImages.removeAll()
         categoryImages = getWeather()
         
