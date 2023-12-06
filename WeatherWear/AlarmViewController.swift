@@ -9,10 +9,24 @@ import UIKit
 import EventKit
 import NotificationCenter
 
-class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AlarmCellSubscriber{
+class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AlarmCellSubscriber {
     private var models = [AlarmListItem]()
     
-    private var timePicker = UIDatePicker()
+//    gross variable because it won't let me curry objc functions
+    private var updateIndex: IndexPath? = nil
+    
+    private var timePicker = {
+        let t = UIDatePicker()
+        t.preferredDatePickerStyle = UIDatePickerStyle.wheels
+        t.setValue(UIColor.white, forKeyPath: "textColor")
+        
+        t.datePickerMode = .time
+          
+        t.backgroundColor = .darkGray
+        
+        return t
+    }()
+ 
     
     private let eventStore = EKEventStore()
     
@@ -22,11 +36,11 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return tf
     }()
     
-    private let sortTimeFormat = {
-        let tf = DateFormatter()
-        tf.dateFormat = "a hh:mm"
-        return tf
-    }()
+//    private let sortTimeFormat = {
+//        let tf = DateFormatter()
+//        tf.dateFormat = "a hh:mm"
+//        return tf
+//    }()
 
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
@@ -39,6 +53,8 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        timePicker.addTarget(self, action: #selector(timePickerChange(sender:)), for: UIControl.Event.valueChanged)
+        
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
             if success {
                 print("got permission")
@@ -46,53 +62,9 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 print(error.localizedDescription)
             }
         }
-//        
-//        eventStore.requestAccess(to: .event) { success, error  in
-//            if success {
-//                print("got permission")
-//            } else if let error = error {
-//                print(error.localizedDescription)
-//            }
-//        }
-//        
-//        getEventPerm()
        
     }
-    
-//    func getEventPerm() {
-//        commented out because not required for the notification type we are using
-//
-//        if #available(iOS 17.0, *) {
-//            print("getting event permission")
-//            eventStore.requestFullAccessToEvents() { success, error in
-//                if success {
-//                    print("event perms")
-//                } else if let error = error {
-//                    print(error.localizedDescription)
-//                }
-//            }
-//        } else {
-//            // Fallback on earlier versions
-//            print("wrong version bad news")
-//        }
-//        eventStore.requestAccess(to: .event, completion: {(accessGranted: Bool, error: Error?) in
-//
-//            if accessGranted == true {
-//                print("Access Has Been Granted")
-//                }
-//            else {
-//                print("Change Settings to Allow Access")
-//            }
-//            })
-//        
-//    }
-    
-    //hide top nav bar
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        navigationController?.setNavigationBarHidden(true, animated: animated)
-//    }
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .darkGray
@@ -130,17 +102,12 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     @objc public func didTapAdd() {
 
-        timePicker.preferredDatePickerStyle = UIDatePickerStyle.wheels
-        timePicker.setValue(UIColor.white, forKeyPath: "textColor")
-        
-        timePicker.datePickerMode = .time
-        timePicker.addTarget(self, action: #selector(timePickerChange(sender:)), for: UIControl.Event.valueChanged)
-       
         let gestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(backgroundTap(gesture:)));
         self.view.addGestureRecognizer(gestureRecognizer)
         
         timePicker.frame = CGRect(x: 0.0, y: (self.view.frame.height/2 + 60), width: self.view.frame.width, height: 150.0)
-        timePicker.backgroundColor = .darkGray
+        
+        timePicker.date = Date()
         self.view.addSubview(timePicker)
     }
     
@@ -150,6 +117,7 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     @objc private func backgroundTap(gesture: UITapGestureRecognizer) {
         timeSelected(sender: timePicker)
+        self.view.removeGestureRecognizer(gesture)
     }
     
     @objc private func timeSelected(sender: UIDatePicker) {
@@ -191,50 +159,12 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: dTrigger)
         UNUserNotificationCenter.current().add(request)
         
-//        This code does not do what I hoped adding events to the calander still results in the same type of notification
-//
-        
-//        let d = timeFormat.date(from: timeFormat.string(from: item.dateTime ?? Date()))
-//        let currentStatus = EKEventStore.authorizationStatus(for: EKEntityType.event)
-//        if currentStatus == EKAuthorizationStatus.notDetermined {
-//            print("dont know")
-//            getEventPerm()
-//        } else if currentStatus == EKAuthorizationStatus.authorized {
-//            print("good to go")
-//        } else {
-//            print("not good")
-//            getEventPerm()
-//        }
-//        let event = {
-//            let e = EKEvent(eventStore: eventStore)
-//            e.title =  "Alarm!"
-//            e.notes = "alarm"
-//            e.calendar = eventStore.defaultCalendarForNewEvents
-//            e.startDate = item.dateTime?.addingTimeInterval(60)
-//            e.endDate = item.dateTime?.addingTimeInterval(120)
-//            return e
-//        }()
-//        
-//        
-//        let alarm = EKAlarm(relativeOffset: -60)
-//        event.addAlarm(alarm)
-//    
-//        do {
-//            try eventStore.save(event, span: .thisEvent)
-//        } catch {
-//            print("uh oh")
-//        }
-//        
-//        let e = eventStore.events(matching: eventStore.predicateForEvents(withStart: item.dateTime?.addingTimeInterval(60) ?? Date(), end: item.dateTime?.addingTimeInterval(60) ?? Date(), calendars: nil))
-//        if e.count == 0{
-//            print("not added")
-//        }
-        
         print("added request")
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        models.sort(by: {sortTimeFormat.string(from: $0.dateTime!) < sortTimeFormat.string(from: $1.dateTime!)})
+//        models.sort(by: {sortTimeFormat.string(from: $0.dateTime!) < sortTimeFormat.string(from: $1.dateTime!)})
+        models.sort(by: {getSortString(d: $0.dateTime ?? Date()) < getSortString(d: $1.dateTime ?? Date())})
         let model = models[indexPath.row]
         scheduleAlarm(item: model)
         let cell = tableView.dequeueReusableCell(withIdentifier: "alarmcell", for: indexPath) as! AlarmCell
@@ -244,9 +174,26 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return cell
     }
     
+//    needed so 12 shows up first
+    func getSortString(d: Date) -> String{
+        let t = DateFormatter()
+        t.dateFormat = "hh"
+        
+        let m = DateFormatter()
+        m.dateFormat = "mm"
+        
+        let p = DateFormatter()
+        p.dateFormat = "a"
+        
+        let h = String((Int(t.string(from: d)) ?? 0) % 12)
+        
+        return p.string(from: d) + h + m.string(from: d)
+    }
+    
 //   add sort feature to sort by Time
     func getAllItems() {
-        models.sort(by: {sortTimeFormat.string(from: $0.dateTime!) < sortTimeFormat.string(from: $1.dateTime!)})
+//        models.sort(by: {sortTimeFormat.string(from: $0.dateTime!) < sortTimeFormat.string(from: $1.dateTime!)})
+        models.sort(by: {getSortString(d: $0.dateTime ?? Date()) < getSortString(d: $1.dateTime ?? Date())})
         do {
             models = try context.fetch(AlarmListItem.fetchRequest())
             DispatchQueue.main.async {
@@ -302,16 +249,39 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
 //   ToDo
-    func updateItem(item: AlarmListItem) {
+    func updateItem(item: AlarmListItem, update: Date) {
+        item.dateTime = update
+        
+        getAllItems()
     }
    
 //    lets use something better in the future that doesn't involve deleting the element
     func alarmUpdate(index: IndexPath?) {
         print("alarm update")
-        let i = index ?? IndexPath(index: 0)
-        deleteItem(item: models.remove(at: i.row))
-        tableView.deleteRows(at: [i], with: .fade)
-        didTapAdd()
+        updateIndex = index
+//        deleteItem(item: models.remove(at: i.row))
+//        tableView.deleteRows(at: [i], with: .fade)
+//        didTapAdd()
+//        let gestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(backgroundTapUpdate(gesture:)));
+        let gestureRecognizer = {
+            let g = UITapGestureRecognizer()
+//            g.addTarget(self, action: #selector(backgroundTapUpdate(gesture: index:)))
+            g.addTarget(self, action: #selector(backgroundTapUpdate(gesture:)))
+            return g
+        }()
+        
+        self.view.addGestureRecognizer(gestureRecognizer)
+        
+        timePicker.frame = CGRect(x: 0.0, y: (self.view.frame.height/2 + 60), width: self.view.frame.width, height: 150.0)
+        if updateIndex ?? nil != nil {
+            timePicker.date = models[updateIndex?.row ?? 0].dateTime ?? Date()
+            self.view.addSubview(timePicker)
+        }
+    }
+    
+    @objc func backgroundTapUpdate(gesture: UITapGestureRecognizer) {
+        updateItem(item: models[updateIndex?.row ?? 0], update: timePicker.date)
+        timePicker.removeFromSuperview()
     }
     
 }
