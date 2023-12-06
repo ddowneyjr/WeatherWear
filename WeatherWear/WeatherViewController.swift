@@ -19,6 +19,7 @@ class WeatherViewController: UIViewController, UITableViewDelegate, UITableViewD
     let table: UITableView = {
         let table = UITableView()
         table.register(WeatherTableViewCell.nib(), forCellReuseIdentifier: WeatherTableViewCell.identifier )
+        table.allowsSelection = false
         return table
     }()
     

@@ -17,6 +17,8 @@ class WeatherTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         backgroundColor = .gray
+        self.selectedBackgroundView?.backgroundColor = UIColor.clear
+        self.selectionStyle = .none
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -41,6 +43,7 @@ class WeatherTableViewCell: UITableViewCell {
         self.lowTempLabel.textColor = .white
         self.highTempLabel.textColor = .white
         self.dayLabel.textColor = .white
+        
         
         
         print(self.lowTempLabel.text!)
