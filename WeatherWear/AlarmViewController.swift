@@ -141,6 +141,7 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func scheduleAlarm (item: AlarmListItem) {
 //        update this with weather and clothing information
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         let content = {
             let c = UNMutableNotificationContent()
             c.title = "test alarm"
@@ -223,7 +224,7 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
             getAllItems()
         }
         catch {
-//          ToDo
+            self.view.backgroundColor = .red
         }
         
         return newItem
