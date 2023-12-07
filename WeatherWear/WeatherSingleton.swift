@@ -42,7 +42,7 @@ class WeatherSingleton: NSObject, CLLocationManagerDelegate {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "WeatherSingletonItem")
 
         do {
-            let items = try context.fetch(fetchRequest)
+            _ = try context.fetch(fetchRequest)
             // use items
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
@@ -53,6 +53,7 @@ class WeatherSingleton: NSObject, CLLocationManagerDelegate {
         let entity = NSEntityDescription.entity(forEntityName: "WeatherSingletonItem", in: context)
         let newItem = NSManagedObject(entity: entity!, insertInto: context)
         newItem.setValue(item, forKey: "myInstanceItem")
+        newItem.setValue(Date(), forKey: "date")
         saveContext()
     }
 
