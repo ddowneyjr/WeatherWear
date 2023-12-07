@@ -17,6 +17,8 @@
 		B85BB2092B166169002F3731 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85BB2082B166169002F3731 /* WeatherViewController.swift */; };
 		B85BB20C2B16625F002F3731 /* WeatherTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B85BB20A2B16625F002F3731 /* WeatherTableViewCell.xib */; };
 		B85BB20D2B16625F002F3731 /* WeatherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85BB20B2B16625F002F3731 /* WeatherTableViewCell.swift */; };
+		B872AE482B1FA3D5002F67E8 /* WeatherSingletonItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B872AE462B1FA3D5002F67E8 /* WeatherSingletonItem+CoreDataClass.swift */; };
+		B872AE492B1FA3D5002F67E8 /* WeatherSingletonItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B872AE472B1FA3D5002F67E8 /* WeatherSingletonItem+CoreDataProperties.swift */; };
 		B886663F2B1E4A2A003DCEC5 /* dailyforecase.json in Resources */ = {isa = PBXBuildFile; fileRef = B886663D2B1E4A2A003DCEC5 /* dailyforecase.json */; };
 		B88666402B1E4A2A003DCEC5 /* testdata.json in Resources */ = {isa = PBXBuildFile; fileRef = B886663E2B1E4A2A003DCEC5 /* testdata.json */; };
 		B8FD54F72AFD5977006AC49E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FD54F62AFD5977006AC49E /* AppDelegate.swift */; };
@@ -41,6 +43,8 @@
 		B85BB2082B166169002F3731 /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 		B85BB20A2B16625F002F3731 /* WeatherTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeatherTableViewCell.xib; sourceTree = "<group>"; };
 		B85BB20B2B16625F002F3731 /* WeatherTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherTableViewCell.swift; sourceTree = "<group>"; };
+		B872AE462B1FA3D5002F67E8 /* WeatherSingletonItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeatherSingletonItem+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B872AE472B1FA3D5002F67E8 /* WeatherSingletonItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeatherSingletonItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B886663D2B1E4A2A003DCEC5 /* dailyforecase.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dailyforecase.json; sourceTree = "<group>"; };
 		B886663E2B1E4A2A003DCEC5 /* testdata.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = testdata.json; sourceTree = "<group>"; };
 		B8FD54F32AFD5977006AC49E /* WeatherWear.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherWear.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,6 +89,15 @@
 			path = WeatherCell;
 			sourceTree = "<group>";
 		};
+		B872AE4B2B1FA3E9002F67E8 /* WeatherSingletonItem */ = {
+			isa = PBXGroup;
+			children = (
+				B872AE462B1FA3D5002F67E8 /* WeatherSingletonItem+CoreDataClass.swift */,
+				B872AE472B1FA3D5002F67E8 /* WeatherSingletonItem+CoreDataProperties.swift */,
+			);
+			path = WeatherSingletonItem;
+			sourceTree = "<group>";
+		};
 		B8FD54EA2AFD5977006AC49E = {
 			isa = PBXGroup;
 			children = (
@@ -104,6 +117,7 @@
 		B8FD54F52AFD5977006AC49E /* WeatherWear */ = {
 			isa = PBXGroup;
 			children = (
+				B872AE4B2B1FA3E9002F67E8 /* WeatherSingletonItem */,
 				8EECE5E72B1E4DB8009A25D5 /* DateEntity */,
 				B8FEBF972B166F6B000FBFAC /* AlarmListItem */,
 				B85BB20E2B166267002F3731 /* WeatherCell */,
@@ -213,12 +227,14 @@
 				8E4EDF5B2B0299F7007DBFEB /* AlarmViewController.swift in Sources */,
 				B8FD54FB2AFD5977006AC49E /* ViewController.swift in Sources */,
 				8EECE5E52B1E4DAC009A25D5 /* DateEntitity+CoreDataClass.swift in Sources */,
+				B872AE492B1FA3D5002F67E8 /* WeatherSingletonItem+CoreDataProperties.swift in Sources */,
 				B8FD54F72AFD5977006AC49E /* AppDelegate.swift in Sources */,
 				8EECE5E62B1E4DAC009A25D5 /* DateEntitity+CoreDataProperties.swift in Sources */,
 				84A4ABD42B1035F10027DBDA /* CustomTableViewCell.swift in Sources */,
 				B855C9D42B18FEEB003D17A0 /* AlarmCustomCell.swift in Sources */,
 				B8FD54F92AFD5977006AC49E /* SceneDelegate.swift in Sources */,
 				B8FEBF9B2B166F6B000FBFAC /* AlarmListItem+CoreDataProperties.swift in Sources */,
+				B872AE482B1FA3D5002F67E8 /* WeatherSingletonItem+CoreDataClass.swift in Sources */,
 				B85BB2092B166169002F3731 /* WeatherViewController.swift in Sources */,
 				B855C9D62B190FEF003D17A0 /* WeatherSingleton.swift in Sources */,
 				B8FEBF9A2B166F6B000FBFAC /* AlarmListItem+CoreDataClass.swift in Sources */,

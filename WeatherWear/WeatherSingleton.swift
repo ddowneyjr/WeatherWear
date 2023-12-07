@@ -33,10 +33,35 @@ class WeatherSingleton: NSObject, CLLocationManagerDelegate {
         
     }
     
-    public static func getInstance() -> WeatherSingleton {
-        
-        return myInstance
+    // Core Data Items
+    
+    func getAllItems() {
+        do {
+            let item = try context.fetch(WeatherSingletonItem.fetchRequest())
+            
+        }
+        catch {
+            print("Error getting WeatherSingletonItem Core Data")
+        }
     }
+    
+    func createItem(item: WeatherSingleton) {
+        let newItem = WeatherSingletonItem(context: context)
+        newItem.myInstanceItem = item
+    }
+    
+    func updateItem(item: WeatherSingleton, prevItem: WeatherSingletonItem) {
+        prevItem.myInstanceItem = item
+    }
+    
+    // Gets the current Instance of the Weather Singleton
+    
+    public static func getInstance()  {
+        
+        return getAllItems()
+    }
+    
+    
     
     // Location
     func setupLocation() {
@@ -54,6 +79,8 @@ class WeatherSingleton: NSObject, CLLocationManagerDelegate {
             }
         }
     }
+    
+    // API Calls to request the weather data
     
     func requestWeatherForLocation(completion: @escaping () -> Void) {
         
@@ -73,7 +100,11 @@ class WeatherSingleton: NSObject, CLLocationManagerDelegate {
         let url = "https://api.weatherbit.io/v2.0/forecast/daily?lat=\(lat)&lon=\(lon)&key=\(key)&units=I"
         print(url)
         
+        // Only run the api calls every 30 minutes
+        
         if Date().addingTimeInterval(-1800) > lastCall?.date ?? Date().addingTimeInterval(-20000){
+            
+            // Requests the current day weather
             let currentApiService = CurrentAPIService(url: URL(string: currenturl))
             currentApiService.fetchData { (root) in
                 guard let root = root else {
@@ -92,6 +123,7 @@ class WeatherSingleton: NSObject, CLLocationManagerDelegate {
                 
             }
             
+            // Request the forecast for the next few days
             let apiService = APIService(url: URL(string: url))
             apiService.fetchData { (root) in
                 guard let root = root else {
