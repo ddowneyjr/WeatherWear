@@ -8,6 +8,7 @@
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
     <entity name="WeatherSingletonItem" representedClassName="WeatherSingletonItem" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="myInstanceItem" optional="YES" attributeType="Transformable"/>
     </entity>
 </model>

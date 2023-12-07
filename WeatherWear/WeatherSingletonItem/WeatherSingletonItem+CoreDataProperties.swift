@@ -17,6 +17,7 @@ extension WeatherSingletonItem {
     }
 
     @NSManaged public var myInstanceItem: NSObject?
+    @NSManaged public var date: Date?
 
 }
 
