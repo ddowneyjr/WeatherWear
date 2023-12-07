@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ClothesViewController: UIViewController{
+class ClothesViewController: UIViewController{//, CustomTableViewCellDelegate{
 
     private let titleArray: NSArray = ["Hats","Tops","Bottoms", "Footwear", "Outerwear"]
     
@@ -25,6 +25,14 @@ class ClothesViewController: UIViewController{
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
+    
+//    func didRetrieveHomeScreenClothes(category: String, clothes: [UIImageView]) {
+//        // Handle the homescreenClothes array in ClothesViewController
+//        print("Category: \(category), Clothes: \(clothes)")
+//
+//        // Forward the category and clothes to ViewController
+//        delegate?.didRetrieveHomeScreenClothes(category: category, clothes: clothes)
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,6 +105,8 @@ extension ClothesViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier, for: indexPath) as! CustomTableViewCell
+        
+        //cell.delegate = self
         
         let category = titleArray[indexPath.row] as! String
         cell.configure(category: category)
