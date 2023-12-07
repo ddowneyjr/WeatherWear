@@ -9,6 +9,7 @@
 import Foundation
 import CoreLocation
 import UIKit
+import CoreData
 
 class WeatherSingleton: NSObject, CLLocationManagerDelegate {
     
@@ -30,35 +31,54 @@ class WeatherSingleton: NSObject, CLLocationManagerDelegate {
     private override init() {
         super.init()
         setupLocation()
+        createItem(item: self)
+        saveContext()
         
     }
     
     // Core Data Items
     
-    func getAllItems() {
+    func fetchItems() {
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "WeatherSingletonItem")
+
         do {
-            let item = try context.fetch(WeatherSingletonItem.fetchRequest())
-            
-        }
-        catch {
-            print("Error getting WeatherSingletonItem Core Data")
+            let items = try context.fetch(fetchRequest)
+            // use items
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
         }
     }
-    
+
     func createItem(item: WeatherSingleton) {
-        let newItem = WeatherSingletonItem(context: context)
-        newItem.myInstanceItem = item
+        let entity = NSEntityDescription.entity(forEntityName: "WeatherSingletonItem", in: context)
+        let newItem = NSManagedObject(entity: entity!, insertInto: context)
+        newItem.setValue(item, forKey: "myInstanceItem")
+        saveContext()
     }
-    
-    func updateItem(item: WeatherSingleton, prevItem: WeatherSingletonItem) {
-        prevItem.myInstanceItem = item
+
+    func updateItem(item: WeatherSingleton, prevItem: NSManagedObject) {
+        prevItem.setValue(item, forKey: "myInstanceItem")
+        saveContext()
     }
-    
+
+    func deleteItem(item: NSManagedObject) {
+        context.delete(item)
+        saveContext()
+    }
+
+    func saveContext() {
+        do {
+            try context.save()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+    }
     // Gets the current Instance of the Weather Singleton
     
-    public static func getInstance()  {
+    public static func getInstance() -> WeatherSingleton  {
         
-        return getAllItems()
+//        return fetchItems(WeatherSingleton)
+        return myInstance
     }
     
     
@@ -151,6 +171,8 @@ class WeatherSingleton: NSObject, CLLocationManagerDelegate {
         else {
             completion()
         }
+        
+        saveContext()
         
     }
 }
