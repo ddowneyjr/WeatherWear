@@ -164,7 +164,8 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 //        models.sort(by: {sortTimeFormat.string(from: $0.dateTime!) < sortTimeFormat.string(from: $1.dateTime!)})
-        models.sort(by: {getSortString(d: $0.dateTime ?? Date()) < getSortString(d: $1.dateTime ?? Date())})
+        models.sort(by: {getSortValue(d: $0.dateTime ?? Date()) < getSortValue(d: $1.dateTime ?? Date())})
+        print("sort done")
         let model = models[indexPath.row]
         scheduleAlarm(item: model)
         let cell = tableView.dequeueReusableCell(withIdentifier: "alarmcell", for: indexPath) as! AlarmCell
@@ -175,7 +176,7 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
 //    needed so 12 shows up first
-    func getSortString(d: Date) -> String{
+    func getSortValue(d: Date) -> Float{
         let t = DateFormatter()
         t.dateFormat = "hh"
         
@@ -187,13 +188,19 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         let h = String((Int(t.string(from: d)) ?? 0) % 12)
         
-        return p.string(from: d) + h + m.string(from: d)
+        var result: Float = (Float(h) ?? 0) + ((Float(m.string(from: d)) ?? 0)/100)
+        print(p.string(from: d))
+        if p.string(from: d) == "AM"{
+            result -= 12
+        }
+        print(result)
+        return result
     }
     
 //   add sort feature to sort by Time
     func getAllItems() {
 //        models.sort(by: {sortTimeFormat.string(from: $0.dateTime!) < sortTimeFormat.string(from: $1.dateTime!)})
-        models.sort(by: {getSortString(d: $0.dateTime ?? Date()) < getSortString(d: $1.dateTime ?? Date())})
+        models.sort(by: {getSortValue(d: $0.dateTime ?? Date()) < getSortValue(d: $1.dateTime ?? Date())})
         do {
             models = try context.fetch(AlarmListItem.fetchRequest())
             DispatchQueue.main.async {
