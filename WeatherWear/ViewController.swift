@@ -9,7 +9,25 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let tabBarVC = UITabBarController()
+    let tBar = {
+        let t = UITabBarController()
+        let avc = UINavigationController(rootViewController: AlarmViewController())
+        avc.title = "Alarm"
+        
+        let cc = UINavigationController(rootViewController: ClothesViewController())
+        cc.title = "Clothes"
+        
+        let wvc = UINavigationController(rootViewController: WeatherViewController())
+        wvc.title = "Weather"
+        
+        t.setViewControllers([wvc, cc, avc], animated: false)
+        t.modalPresentationStyle = .fullScreen
+        t.tabBar.isTranslucent = false
+        t.tabBar.backgroundColor = .white
+        t.tabBar.tintColor = .blue
+        return t
+    }()
+    
     
     var weatherSingleton: WeatherSingleton? = nil
     
@@ -73,103 +91,20 @@ class ViewController: UIViewController {
    
     
     @objc func alarmButtonTap() {
+        tBar.selectedIndex = 2
         
-        
-        let avc = UINavigationController(rootViewController: AlarmViewController())
-        avc.title = "Alarm"
-
-        let wvc = UINavigationController(rootViewController: WeatherViewController())
-        wvc.title = "Weather"
-        
-        let cc = UINavigationController(rootViewController: ClothesViewController())
-        cc.title = "Clothes"
-        
-
-        
-        tabBarVC.setViewControllers([avc, cc, wvc], animated: false)
-        tabBarVC.modalPresentationStyle = .fullScreen
-        tabBarVC.tabBar.isTranslucent = false
-        tabBarVC.tabBar.backgroundColor = .white
-        tabBarVC.tabBar.tintColor = .blue
-        present(tabBarVC, animated: true)
-
+        present(tBar, animated: true)
     }
     
     @objc func clothesButtonTap() {
-        
-        let avc = UINavigationController(rootViewController: AlarmViewController())
-        avc.title = "Alarm"
-
-        let cc = UINavigationController(rootViewController: ClothesViewController())
-        cc.title = "Clothes"
-        
-        let wvc = UINavigationController(rootViewController: WeatherViewController())
-        wvc.title = "Weather"
-
-        
-        tabBarVC.setViewControllers([cc, avc,  wvc], animated: false)
-        tabBarVC.modalPresentationStyle = .fullScreen
-        tabBarVC.tabBar.isTranslucent = false
-        tabBarVC.tabBar.backgroundColor = .white
-        tabBarVC.tabBar.tintColor = .blue
-        present(tabBarVC, animated: true)
-
+        tBar.selectedIndex = 1
+        present(tBar, animated: true)
     }
-    
     
     @objc func weatherButtonTap() {
-       
-        
-        let avc = UINavigationController(rootViewController: AlarmViewController())
-        avc.title = "Alarm"
-
-        let cc = UINavigationController(rootViewController: ClothesViewController())
-        cc.title = "Clothes"
-        
-        let wvc = UINavigationController(rootViewController: WeatherViewController())
-        wvc.title = "Weather"
-        
-        tabBarVC.setViewControllers([wvc, cc, avc], animated: false)
-        tabBarVC.modalPresentationStyle = .fullScreen
-        tabBarVC.tabBar.isTranslucent = false
-        tabBarVC.tabBar.backgroundColor = .white
-        tabBarVC.tabBar.tintColor = .blue
-        present(tabBarVC, animated: true)
-
+        tBar.selectedIndex = 0
+        present(tBar, animated: true)
     }
-    
-    func createTabBar(vc: UINavigationController) {
-        let tabs: [UINavigationController] = [UINavigationController(rootViewController: AlarmViewController()), UINavigationController(rootViewController: ClothesViewController()), UINavigationController(rootViewController: WeatherViewController())]
-        
-        tabs[0].title = "Alarm"
-        tabs[0].title = "Weather"
-        tabs[0].title = "Clothes"
-        
-        for name in tabs {
-            tabBarVC.setViewControllers([name], animated: false)
-            tabBarVC.modalPresentationStyle = .fullScreen
-            tabBarVC.tabBar.isTranslucent = false
-            tabBarVC.tabBar.backgroundColor = .white
-            tabBarVC.tabBar.tintColor = .blue
-        }
-        
-    }
-    
-//    @objc func weatherButtonTap() {
-//        let weatherVC = WeatherViewController()
-//        let navController = UINavigationController(rootViewController: weatherVC)
-//        weatherVC.title = "Weather"
-//
-//        let tabBarVC = UITabBarController()
-//        tabBarVC.setViewControllers([navController], animated: false)
-//        tabBarVC.modalPresentationStyle = .fullScreen
-//        tabBarVC.tabBar.isTranslucent = false
-//        tabBarVC.tabBar.backgroundColor = .white
-//        tabBarVC.tabBar.tintColor = .blue
-//        present(tabBarVC, animated: true)
-//
-//    }
-    
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
