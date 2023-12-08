@@ -1,13 +1,21 @@
 import UIKit
 
+//protocol to send homescreenSclothes to ViewController
+protocol CustomTableViewCellDelegate: AnyObject {
+    func didRetrieveHomeScreenClothes(category: String, clothes: [UIImageView])
+}
+
 class CustomTableViewCell: UITableViewCell {
+    
+    weak var delegate: CustomTableViewCellDelegate?
+    var homescreenClothes: [UIImageView] = []
 
     var weatherSingleton: WeatherSingleton? = nil
     
     static let identifier = "CustomTableViewCell"
 
     private let titleArray: NSArray = ["Hats", "Tops", "Bottoms", "Footwear", "OuterWear"]
-
+    
     private var categoryText: UILabel = {
         let categoryText = UILabel()
         categoryText.textColor = .white
@@ -68,6 +76,10 @@ class CustomTableViewCell: UITableViewCell {
 
             // Set content size based on the total width of images
             clothesScroll.contentSize = CGSize(width: xOffset, height: 100)
+            
+            // Notify the delegate with the homescreenClothes array
+            delegate?.didRetrieveHomeScreenClothes(category: category, clothes: homescreenClothes)
+
         }
     }
 
@@ -86,6 +98,11 @@ class CustomTableViewCell: UITableViewCell {
         
         categoryImages.removeAll()
         categoryImages = getWeather()
+       
+        homescreenClothes.append((categoryImages["Tops"]?[0])!)
+        homescreenClothes.append((categoryImages["Bottoms"]?[0])!)
+        homescreenClothes.append((categoryImages["Footwear"]?[0])!)
+        //print("HomeScreen Clothes: \(homescreenClothes) END HOMESCREEN CLOTHES")
         
     }
 
@@ -109,14 +126,14 @@ class CustomTableViewCell: UITableViewCell {
         weatherSingleton = WeatherSingleton.getInstance()
         let temp = weatherSingleton?.currentWeather?.temp ?? -999
        
-        if (temp == -999){
+        if (temp >= -999){
             print("Temperature not available")
         }else{
             print("Temperature: \(temp)")
         }
         
         let rain = weatherSingleton?.currentWeather?.precip ?? -999
-        if (rain == -999){
+        if (rain >= -999){
             print("Rain not available")
         }else{
             print("Rain: \(rain)")

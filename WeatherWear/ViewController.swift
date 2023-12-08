@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, CustomTableViewCellDelegate {
     
     let tBar = {
         let t = UITabBarController()
@@ -30,6 +30,15 @@ class ViewController: UIViewController {
     
     
     var weatherSingleton: WeatherSingleton? = nil
+    
+    //trying to get certain uiimageviews from customtableviewcell
+    var homeScreenClothes: [UIImageView] = []
+    func didRetrieveHomeScreenClothes(category: String, clothes: [UIImageView]) {
+        // Handle the homescreenClothes array in ViewController
+        print("\n\nCategory: \(category), Clothes: \(clothes)\n\n")
+        
+        homeScreenClothes = clothes
+    }
     
     private let backgroundImageView: UIImageView = {
         let imageView = UIImageView(frame: UIScreen.main.bounds)
@@ -82,6 +91,7 @@ class ViewController: UIViewController {
         
         view.addSubview(backgroundImageView)
         view.sendSubviewToBack(backgroundImageView)
+        //didRetrieveHomeScreenClothes()
     }
     
     override func viewDidAppear(_ animated: Bool) {
