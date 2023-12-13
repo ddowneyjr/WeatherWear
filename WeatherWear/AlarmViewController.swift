@@ -18,11 +18,11 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
     private var timePicker = {
         let t = UIDatePicker()
         t.preferredDatePickerStyle = UIDatePickerStyle.wheels
-        t.setValue(UIColor.white, forKeyPath: "textColor")
+        t.setValue(UIColor.black, forKeyPath: "textColor")
         
         t.datePickerMode = .time
           
-        t.backgroundColor = .darkGray
+        t.backgroundColor = .white
         
         return t
     }()
@@ -30,17 +30,17 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     private let eventStore = EKEventStore()
     
+    private let maskingView = {
+        let m = UIView()
+        m.backgroundColor = .clear
+        return m
+    }()
+    
     private let timeFormat = {
         let tf = DateFormatter()
         tf.dateFormat = "hh:mm a"
         return tf
     }()
-    
-//    private let sortTimeFormat = {
-//        let tf = DateFormatter()
-//        tf.dateFormat = "a hh:mm"
-//        return tf
-//    }()
 
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
@@ -57,12 +57,11 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
             if success {
-                print("got permission")
+//                print("got permission")
             } else if let error = error {
                 print(error.localizedDescription)
             }
         }
-       
     }
    
     override func viewDidLoad() {
@@ -99,16 +98,23 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
 //    add functionality to choose a date
-    
     @objc public func didTapAdd() {
 
         let gestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(backgroundTap(gesture:)));
-        self.view.addGestureRecognizer(gestureRecognizer)
+//        self.view.addGestureRecognizer(gestureRecognizer)
+        timePicker.addGestureRecognizer(gestureRecognizer)
         
-        timePicker.frame = CGRect(x: 0.0, y: (self.view.frame.height/2 + 60), width: self.view.frame.width, height: 150.0)
+        timePicker.frame = CGRect(x: 25, y: (self.view.frame.height / 3), width: self.view.frame.width - 50, height: 300)
+        
+        timePicker.layer.cornerRadius = 20
+        timePicker.layer.masksToBounds = true
         
         timePicker.date = Date()
-        self.view.addSubview(timePicker)
+        maskingView.frame = self.view.frame
+        maskingView.addSubview(timePicker)
+        maskingView.addGestureRecognizer(gestureRecognizer)
+        self.view.addSubview(maskingView)
+        
     }
     
     @objc private func timePickerChange(sender: UIDatePicker) {
@@ -117,11 +123,15 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     @objc private func backgroundTap(gesture: UITapGestureRecognizer) {
         timeSelected(sender: timePicker)
-        self.view.removeGestureRecognizer(gesture)
+//        self.view.removeGestureRecognizer(gesture)
+//        timePicker.removeGestureRecognizer(gesture)
+        timePicker.removeFromSuperview()
+        maskingView.removeGestureRecognizer(gesture)
+        maskingView.removeFromSuperview()
     }
     
     @objc private func timeSelected(sender: UIDatePicker) {
-        print("select")
+//        print("select")
         createItem(dt: sender.date)
         sender.removeFromSuperview()
     }
@@ -160,13 +170,13 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: dTrigger)
         UNUserNotificationCenter.current().add(request)
         
-        print("added request")
+//        print("added request")
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 //        models.sort(by: {sortTimeFormat.string(from: $0.dateTime!) < sortTimeFormat.string(from: $1.dateTime!)})
         models.sort(by: {getSortValue(d: $0.dateTime ?? Date()) < getSortValue(d: $1.dateTime ?? Date())})
-        print("sort done")
+//        print("sort done")
         let model = models[indexPath.row]
         scheduleAlarm(item: model)
         let cell = tableView.dequeueReusableCell(withIdentifier: "alarmcell", for: indexPath) as! AlarmCell
@@ -190,11 +200,11 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let h = String((Int(t.string(from: d)) ?? 0) % 12)
         
         var result: Float = (Float(h) ?? 0) + ((Float(m.string(from: d)) ?? 0)/100)
-        print(p.string(from: d))
+//        print(p.string(from: d))
         if p.string(from: d) == "AM"{
             result -= 12
         }
-        print(result)
+//        print(result)
         return result
     }
     
@@ -266,31 +276,50 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
    
 //    lets use something better in the future that doesn't involve deleting the element
     func alarmUpdate(index: IndexPath?) {
-        print("alarm update")
+//        print("alarm update")
         updateIndex = index
-//        deleteItem(item: models.remove(at: i.row))
-//        tableView.deleteRows(at: [i], with: .fade)
-//        didTapAdd()
-//        let gestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(backgroundTapUpdate(gesture:)));
+        
         let gestureRecognizer = {
             let g = UITapGestureRecognizer()
-//            g.addTarget(self, action: #selector(backgroundTapUpdate(gesture: index:)))
             g.addTarget(self, action: #selector(backgroundTapUpdate(gesture:)))
             return g
         }()
         
+//      add to timePickerView not view
         self.view.addGestureRecognizer(gestureRecognizer)
+//        self.tableView.addGestureRecognizer(gestureRecognizer)
+//        for t in tab
+//            
+//        }
+//        self.view.subviews.
+//        timePicker.addGestureRecognizer(gestureRecognizer)
+//        self.view.addGestureRecognizer(gestureRecognizer)
         
-        timePicker.frame = CGRect(x: 0.0, y: (self.view.frame.height/2 + 60), width: self.view.frame.width, height: 150.0)
+        timePicker.frame = CGRect(x: 25, y: (self.view.frame.height / 3), width: self.view.frame.width - 50, height: 300)
+        
+        timePicker.layer.cornerRadius = 20
+        timePicker.layer.masksToBounds = true
+        
         if updateIndex ?? nil != nil {
             timePicker.date = models[updateIndex?.row ?? 0].dateTime ?? Date()
-            self.view.addSubview(timePicker)
+//            self.view.addSubview(timePicker)
+            maskingView.frame = self.view.frame
+            maskingView.addSubview(timePicker)
+            maskingView.addGestureRecognizer(gestureRecognizer)
+            self.view.addSubview(maskingView)
+            
         }
     }
     
     @objc func backgroundTapUpdate(gesture: UITapGestureRecognizer) {
+        print("background")
+//        print(gesture.location(in: timePicker))
+//        print(timePicker.bounds.contains(gesture.location(in: timePicker)))
         updateItem(item: models[updateIndex?.row ?? 0], update: timePicker.date)
+//        timePicker.removeGestureRecognizer(gesture)
         timePicker.removeFromSuperview()
+        maskingView.removeGestureRecognizer(gesture)
+        maskingView.removeFromSuperview()
     }
     
 }
