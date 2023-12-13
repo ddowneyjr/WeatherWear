@@ -19,8 +19,8 @@
 		B85BB20D2B16625F002F3731 /* WeatherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85BB20B2B16625F002F3731 /* WeatherTableViewCell.swift */; };
 		B872AE482B1FA3D5002F67E8 /* WeatherSingletonItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B872AE462B1FA3D5002F67E8 /* WeatherSingletonItem+CoreDataClass.swift */; };
 		B872AE492B1FA3D5002F67E8 /* WeatherSingletonItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B872AE472B1FA3D5002F67E8 /* WeatherSingletonItem+CoreDataProperties.swift */; };
-		B886663F2B1E4A2A003DCEC5 /* dailyforecase.json in Resources */ = {isa = PBXBuildFile; fileRef = B886663D2B1E4A2A003DCEC5 /* dailyforecase.json */; };
-		B88666402B1E4A2A003DCEC5 /* testdata.json in Resources */ = {isa = PBXBuildFile; fileRef = B886663E2B1E4A2A003DCEC5 /* testdata.json */; };
+		B8780F392B2A5AF700D4B5BD /* current_weather_saratoga.json in Resources */ = {isa = PBXBuildFile; fileRef = B8780F372B2A5AF700D4B5BD /* current_weather_saratoga.json */; };
+		B8780F3A2B2A5AF700D4B5BD /* daily_forecast_saratoga.json in Resources */ = {isa = PBXBuildFile; fileRef = B8780F382B2A5AF700D4B5BD /* daily_forecast_saratoga.json */; };
 		B8FD54F72AFD5977006AC49E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FD54F62AFD5977006AC49E /* AppDelegate.swift */; };
 		B8FD54F92AFD5977006AC49E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FD54F82AFD5977006AC49E /* SceneDelegate.swift */; };
 		B8FD54FB2AFD5977006AC49E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FD54FA2AFD5977006AC49E /* ViewController.swift */; };
@@ -45,8 +45,8 @@
 		B85BB20B2B16625F002F3731 /* WeatherTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherTableViewCell.swift; sourceTree = "<group>"; };
 		B872AE462B1FA3D5002F67E8 /* WeatherSingletonItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeatherSingletonItem+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B872AE472B1FA3D5002F67E8 /* WeatherSingletonItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeatherSingletonItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		B886663D2B1E4A2A003DCEC5 /* dailyforecase.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dailyforecase.json; sourceTree = "<group>"; };
-		B886663E2B1E4A2A003DCEC5 /* testdata.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = testdata.json; sourceTree = "<group>"; };
+		B8780F372B2A5AF700D4B5BD /* current_weather_saratoga.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = current_weather_saratoga.json; sourceTree = "<group>"; };
+		B8780F382B2A5AF700D4B5BD /* daily_forecast_saratoga.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = daily_forecast_saratoga.json; sourceTree = "<group>"; };
 		B8FD54F32AFD5977006AC49E /* WeatherWear.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherWear.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8FD54F62AFD5977006AC49E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B8FD54F82AFD5977006AC49E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -135,8 +135,8 @@
 				B8FD54FF2AFD5977006AC49E /* WeatherWear.xcdatamodeld */,
 				B85BB2082B166169002F3731 /* WeatherViewController.swift */,
 				B855C9D52B190FEF003D17A0 /* WeatherSingleton.swift */,
-				B886663D2B1E4A2A003DCEC5 /* dailyforecase.json */,
-				B886663E2B1E4A2A003DCEC5 /* testdata.json */,
+				B8780F372B2A5AF700D4B5BD /* current_weather_saratoga.json */,
+				B8780F382B2A5AF700D4B5BD /* daily_forecast_saratoga.json */,
 			);
 			path = WeatherWear;
 			sourceTree = "<group>";
@@ -209,11 +209,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				B85BB20C2B16625F002F3731 /* WeatherTableViewCell.xib in Resources */,
-				B886663F2B1E4A2A003DCEC5 /* dailyforecase.json in Resources */,
 				B8FD55062AFD5978006AC49E /* LaunchScreen.storyboard in Resources */,
+				B8780F3A2B2A5AF700D4B5BD /* daily_forecast_saratoga.json in Resources */,
 				B8FD55032AFD5978006AC49E /* Assets.xcassets in Resources */,
+				B8780F392B2A5AF700D4B5BD /* current_weather_saratoga.json in Resources */,
 				B8FD54FE2AFD5977006AC49E /* Main.storyboard in Resources */,
-				B88666402B1E4A2A003DCEC5 /* testdata.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,7 +392,6 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = NHQ28784JP;
 				DEVELOPMENT_TEAM = H3GNP323Z6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WeatherWear/Info.plist;
@@ -423,7 +422,6 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = NHQ28784JP;
 				DEVELOPMENT_TEAM = H3GNP323Z6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WeatherWear/Info.plist;

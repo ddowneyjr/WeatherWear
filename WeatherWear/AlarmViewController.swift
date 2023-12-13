@@ -241,6 +241,7 @@ class AlarmViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
         catch {
 //           ToDo
+            self.view.backgroundColor = .red
         }
         return newItem
     }
